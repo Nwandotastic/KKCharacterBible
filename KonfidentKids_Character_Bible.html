@@ -1,0 +1,1964 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KonfidentKids — Character Bible v1.0</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,400;1,9..144,600&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy:       #0B1A3A;
+    --navy-deep:  #050E22;
+    --navy-soft:  #1A2A52;
+    --navy-haze:  #243460;
+    --yellow:     #FFD23F;
+    --yellow-hot: #FFC300;
+    --yellow-soft:#FFE88A;
+    --yellow-glow:rgba(255,210,63,0.18);
+    --cream:      #FFF8E7;
+    --white:      #FFFDF7;
+    --ink:        #0B1A3A;
+    --mid:        #4A5578;
+    --mid-light:  #7C879E;
+    --border:     rgba(11,26,58,0.12);
+    --border-yellow: rgba(255,210,63,0.35);
+    --border-dark: rgba(255,253,247,0.12);
+
+    /* character accent colours — for the per-character cards */
+    --c-kai:    #E84545;
+    --c-maya:   #FF5BA3;
+    --c-ollie:  #3B7DDB;
+    --c-jayden: #F08A3E;
+    --c-ruby:   #9B5DE5;
+    --c-lily:   #5DCFCB;
+    --c-leo:    #2BA28A;
+    --c-nova:   #4361C7;
+    --c-finn:   #6EC1F0;
+    --c-zane:   #4FCBA8;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--cream);
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 400;
+    line-height: 1.6;
+    font-size: 15px;
+  }
+
+  .wrap { max-width: 1180px; margin: 0 auto; padding: 0 16px; }
+
+  /* ════════════ HERO ════════════ */
+  .hero {
+    background: var(--navy);
+    color: var(--white);
+    padding: 88px 56px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -120px; right: -120px;
+    width: 480px; height: 480px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,210,63,0.20) 0%, transparent 65%);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -180px; left: -100px;
+    width: 380px; height: 380px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,210,63,0.10) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-inner { position: relative; z-index: 1; max-width: 1180px; margin: 0 auto; }
+  .hero-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--yellow);
+    border: 1px solid var(--border-yellow);
+    padding: 8px 16px;
+    border-radius: 100px;
+    margin-bottom: 32px;
+  }
+  .hero-tag .dot {
+    width: 6px; height: 6px;
+    background: var(--yellow);
+    border-radius: 50%;
+    animation: pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.4; } }
+
+  h1 {
+    font-family: 'Fraunces', serif;
+    font-size: 64px;
+    font-weight: 300;
+    line-height: 1.05;
+    letter-spacing: -0.025em;
+    margin-bottom: 24px;
+    max-width: 1000px;
+  }
+  h1 em {
+    color: var(--yellow);
+    font-style: italic;
+    font-weight: 400;
+  }
+  .hero-sub {
+    font-family: 'Fraunces', serif;
+    font-size: 22px;
+    font-weight: 300;
+    line-height: 1.55;
+    color: rgba(255,253,247,0.78);
+    max-width: 820px;
+    margin-bottom: 56px;
+    font-style: italic;
+  }
+  .hero-meta {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    border-top: 1px solid var(--border-dark);
+    padding-top: 36px;
+  }
+  .meta-block { padding-right: 32px; border-right: 1px solid var(--border-dark); }
+  .meta-block:last-child { border-right: none; }
+  .meta-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--yellow);
+    margin-bottom: 8px;
+  }
+  .meta-val {
+    font-family: 'Fraunces', serif;
+    font-size: 22px;
+    font-weight: 400;
+    color: var(--white);
+    line-height: 1.2;
+  }
+
+  /* ════════════ SECTIONS ════════════ */
+  .section {
+    padding: 96px 56px;
+    background: var(--cream);
+  }
+  .section.dark { background: var(--navy); color: var(--white); }
+  .section.cream { background: var(--white); }
+  .section.deep { background: var(--navy-deep); color: var(--white); }
+
+  .s-num {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--yellow-hot);
+    margin-bottom: 28px;
+  }
+  .section.dark .s-num, .section.deep .s-num { color: var(--yellow); }
+  .s-num .line { width: 32px; height: 1px; background: currentColor; opacity: 0.6; }
+
+  h2 {
+    font-family: 'Fraunces', serif;
+    font-size: 48px;
+    font-weight: 300;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin-bottom: 24px;
+    max-width: 900px;
+  }
+  h2 em { font-style: italic; color: var(--yellow-hot); font-weight: 400; }
+  .section.dark h2 em, .section.deep h2 em { color: var(--yellow); }
+
+  h3 {
+    font-family: 'Fraunces', serif;
+    font-size: 26px;
+    font-weight: 500;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+    margin-bottom: 14px;
+  }
+
+  h4 {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--yellow-hot);
+    margin-bottom: 12px;
+  }
+  .section.dark h4, .section.deep h4 { color: var(--yellow); }
+
+  .lede {
+    font-family: 'Fraunces', serif;
+    font-size: 22px;
+    font-weight: 300;
+    line-height: 1.5;
+    color: var(--mid);
+    max-width: 820px;
+    margin-bottom: 48px;
+    font-style: italic;
+  }
+  .section.dark .lede, .section.deep .lede { color: rgba(255,253,247,0.72); }
+
+  p { margin-bottom: 16px; }
+  p:last-child { margin-bottom: 0; }
+
+  /* ════════════ WORLD RULES ════════════ */
+  .world-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    margin-top: 48px;
+  }
+  .world-card {
+    padding: 36px 32px;
+    background: var(--navy-soft);
+    border: 1px solid var(--border-dark);
+    border-radius: 6px;
+  }
+  .world-card h3 { color: var(--white); margin-bottom: 8px; }
+  .world-card .role {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--yellow);
+    margin-bottom: 18px;
+  }
+  .world-card p { color: rgba(255,253,247,0.78); font-size: 14.5px; line-height: 1.7; }
+  .world-card ul { list-style: none; margin-top: 14px; }
+  .world-card ul li {
+    color: rgba(255,253,247,0.85);
+    font-size: 14px;
+    padding: 7px 0 7px 22px;
+    position: relative;
+  }
+  .world-card ul li::before {
+    content: '★';
+    position: absolute;
+    left: 0; top: 5px;
+    color: var(--yellow);
+    font-size: 13px;
+  }
+
+  /* ════════════ PROMPT BLOCK ════════════ */
+  .prompt-block {
+    background: var(--navy);
+    color: var(--white);
+    padding: 28px 32px;
+    border-radius: 6px;
+    border-left: 4px solid var(--yellow);
+    margin: 24px 0;
+    font-family: 'DM Sans', sans-serif;
+    position: relative;
+  }
+  .prompt-block.light {
+    background: #FBF1D2;
+    color: var(--ink);
+    border-left-color: var(--yellow-hot);
+  }
+  .prompt-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--yellow);
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .prompt-block.light .prompt-label { color: var(--yellow-hot); }
+  .prompt-text {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14.5px;
+    line-height: 1.7;
+    font-weight: 400;
+  }
+  .prompt-block code, .prompt-text em {
+    font-style: italic;
+    color: var(--yellow-soft);
+  }
+  .prompt-block.light code, .prompt-block.light .prompt-text em {
+    color: var(--c-kai);
+    font-style: italic;
+  }
+
+  /* ════════════ NEGATIVE PROMPT BANNER ════════════ */
+  .neg-prompt {
+    background: linear-gradient(135deg, #2A1A1A 0%, #3A2424 100%);
+    color: var(--white);
+    padding: 32px 36px;
+    border-radius: 6px;
+    border-left: 4px solid #E84545;
+    margin: 32px 0;
+  }
+  .neg-prompt .neg-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: #FF8A8A;
+    margin-bottom: 12px;
+  }
+  .neg-prompt p { color: rgba(255,253,247,0.85); font-size: 14.5px; line-height: 1.7; }
+
+  /* ════════════ CAST GRID ════════════ */
+  .cast-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 16px;
+    margin-top: 56px;
+  }
+  .cast-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-top: 4px solid var(--accent);
+    border-radius: 6px;
+    padding: 22px 18px;
+    transition: transform 0.2s ease;
+  }
+  .cast-card:hover { transform: translateY(-3px); }
+  .cast-card .ch-num {
+    font-family: 'Fraunces', serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    color: var(--mid-light);
+    margin-bottom: 8px;
+  }
+  .cast-card .ch-name {
+    font-family: 'Fraunces', serif;
+    font-size: 26px;
+    font-weight: 500;
+    color: var(--ink);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .cast-card .ch-role {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 12px;
+  }
+  .cast-card .ch-desc {
+    font-size: 13px;
+    color: var(--mid);
+    line-height: 1.5;
+  }
+
+  /* ════════════ CHARACTER PROFILE ════════════ */
+  .char-profile {
+    padding: 80px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .char-profile:last-child { border-bottom: none; }
+  .char-header {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 40px;
+    align-items: center;
+    margin-bottom: 56px;
+  }
+  .char-badge {
+    background: var(--accent);
+    color: var(--white);
+    padding: 28px 20px;
+    border-radius: 8px;
+    text-align: center;
+    position: relative;
+  }
+  .char-badge .ch-num {
+    font-family: 'Fraunces', serif;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    color: rgba(255,255,255,0.7);
+    margin-bottom: 6px;
+  }
+  .char-badge .ch-name {
+    font-family: 'Fraunces', serif;
+    font-size: 42px;
+    font-weight: 400;
+    line-height: 1;
+    margin-bottom: 8px;
+    font-style: italic;
+  }
+  .char-badge .ch-role {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.85);
+  }
+  .char-meta {}
+  .char-meta .tagline {
+    font-family: 'Fraunces', serif;
+    font-size: 28px;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--ink);
+    line-height: 1.25;
+    margin-bottom: 18px;
+  }
+  .char-meta .lesson {
+    display: inline-block;
+    background: var(--accent);
+    color: var(--white);
+    padding: 8px 16px;
+    border-radius: 100px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-bottom: 18px;
+  }
+  .char-meta .traits {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 8px;
+  }
+  .char-meta .trait {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--ink);
+    background: var(--cream);
+    border: 1px solid var(--border);
+    padding: 5px 12px;
+    border-radius: 100px;
+  }
+
+  .anchor-block {
+    background: var(--white);
+    padding: 28px 32px;
+    border-radius: 6px;
+    border-left: 4px solid var(--accent);
+    margin-bottom: 32px;
+  }
+  .anchor-block .anchor-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 10px;
+  }
+  .anchor-block .anchor-text {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14.5px;
+    line-height: 1.7;
+    color: var(--ink);
+  }
+
+  /* ════════════ SHEET SECTIONS (Master / Expression / Action) ════════════ */
+  .sheet-section { margin-top: 36px; }
+  .sheet-title {
+    font-family: 'Fraunces', serif;
+    font-size: 22px;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 4px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .sheet-title .pill {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--white);
+    background: var(--accent);
+    padding: 4px 10px;
+    border-radius: 100px;
+  }
+  .sheet-sub {
+    font-size: 14px;
+    color: var(--mid);
+    margin-bottom: 20px;
+  }
+  .sheet-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+  }
+  .sheet-grid.cols-3 { grid-template-columns: repeat(3, 1fr); }
+  .sheet-grid.cols-4 { grid-template-columns: repeat(4, 1fr); }
+  .sheet-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    padding: 18px 20px;
+    border-radius: 6px;
+    transition: border-color 0.2s ease;
+  }
+  .sheet-card:hover { border-color: var(--accent); }
+  .sheet-card .sc-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+  .sheet-card .sc-text {
+    font-size: 13.5px;
+    line-height: 1.55;
+    color: var(--ink);
+  }
+
+  /* ════════════ STAGECRAFT (voice/scene) ════════════ */
+  .stagecraft {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-top: 36px;
+  }
+  .stage-card {
+    background: var(--cream);
+    border: 1px solid var(--border);
+    padding: 24px 28px;
+    border-radius: 6px;
+  }
+  .stage-card h5 {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 10px;
+  }
+  .stage-card p { font-size: 14px; color: var(--ink); line-height: 1.65; }
+
+  /* ════════════ RECIPE / PAIRINGS ════════════ */
+  .recipe-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    margin-top: 48px;
+  }
+  .recipe {
+    background: var(--white);
+    border: 1px solid var(--border);
+    padding: 32px;
+    border-radius: 6px;
+    border-top: 3px solid var(--yellow-hot);
+  }
+  .recipe .recipe-tag {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--yellow-hot);
+    margin-bottom: 10px;
+  }
+  .recipe h3 { font-size: 22px; margin-bottom: 12px; }
+  .recipe p { color: var(--mid); font-size: 14.5px; line-height: 1.65; }
+  .recipe .recipe-cast {
+    margin-top: 18px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .recipe .cast-chip {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--white);
+    padding: 4px 10px;
+    border-radius: 100px;
+  }
+
+  /* ════════════ MODULE TABLE ════════════ */
+  .mod-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 40px;
+    background: var(--white);
+    border-radius: 6px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+  }
+  .mod-table th, .mod-table td {
+    padding: 16px 20px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+    font-size: 14px;
+    vertical-align: top;
+  }
+  .mod-table th {
+    background: var(--navy);
+    color: var(--white);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+  .mod-table tr:last-child td { border-bottom: none; }
+  .mod-table .mod-num {
+    font-family: 'Fraunces', serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--yellow-hot);
+    font-style: italic;
+  }
+  .mod-table .mod-theme {
+    font-weight: 600;
+    color: var(--ink);
+  }
+
+  /* ════════════ QUALITY GATE ════════════ */
+  .quality-gate {
+    background: var(--yellow-soft);
+    border-left: 4px solid var(--yellow-hot);
+    padding: 24px 32px;
+    border-radius: 4px;
+    margin: 32px 0;
+  }
+  .quality-gate strong {
+    display: block;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--yellow-hot);
+    margin-bottom: 8px;
+  }
+  .quality-gate p { color: var(--ink); font-size: 14.5px; line-height: 1.65; }
+
+  /* ════════════ CHECKLIST ════════════ */
+  .checklist {
+    list-style: none;
+    margin-top: 24px;
+    background: var(--white);
+    padding: 28px 32px;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+  }
+  .checklist li {
+    padding: 14px 0 14px 36px;
+    position: relative;
+    border-bottom: 1px dashed var(--border);
+    font-size: 14.5px;
+    line-height: 1.55;
+    color: var(--ink);
+  }
+  .checklist li:last-child { border-bottom: none; }
+  .checklist li::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 16px;
+    width: 18px; height: 18px;
+    border: 1.5px solid var(--navy);
+    border-radius: 4px;
+  }
+  .checklist li::after {
+    content: '✓';
+    position: absolute;
+    left: 4px; top: 13px;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--yellow-hot);
+    opacity: 0;
+  }
+  .checklist li:hover::after { opacity: 1; }
+
+  /* ════════════ FOOTER ════════════ */
+  .footer {
+    background: var(--navy-deep);
+    color: rgba(255,253,247,0.6);
+    padding: 56px 56px;
+    text-align: center;
+  }
+  .footer-mark {
+    font-family: 'Fraunces', serif;
+    font-size: 22px;
+    font-weight: 500;
+    color: var(--yellow);
+    margin-bottom: 10px;
+    font-style: italic;
+  }
+  .footer p { font-size: 13px; line-height: 1.6; max-width: 720px; margin: 0 auto; }
+
+  /* ════════════ RESPONSIVE ════════════ */
+  @media (max-width: 920px) {
+    .section, .hero { padding: 64px 24px; }
+    h1 { font-size: 42px; }
+    h2 { font-size: 32px; }
+    .hero-meta { grid-template-columns: 1fr 1fr; gap: 24px; }
+    .meta-block { border-right: none; border-bottom: 1px solid var(--border-dark); padding-bottom: 16px; padding-right: 0; }
+    .world-grid, .recipe-grid, .stagecraft { grid-template-columns: 1fr; }
+    .cast-grid { grid-template-columns: repeat(2, 1fr); }
+    .char-header { grid-template-columns: 1fr; gap: 24px; text-align: left; }
+    .sheet-grid, .sheet-grid.cols-3, .sheet-grid.cols-4 { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 560px) {
+    .cast-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ════════════ HERO ════════════ -->
+<header class="hero">
+  <div class="hero-inner">
+    <div class="hero-tag"><span class="dot"></span>Character Bible · v1.0 · Companion to the Animated Song Playbook</div>
+    <h1>The Konfident Kids <em>Character Bible</em>.</h1>
+    <p class="hero-sub">Ten recurring 3D characters, locked references, and copy-paste prompts for every master portrait, expression, and action shot — so every video on every platform looks like the same world.</p>
+    <div class="hero-meta">
+      <div class="meta-block">
+        <div class="meta-label">Characters</div>
+        <div class="meta-val">10 recurring kids</div>
+      </div>
+      <div class="meta-block">
+        <div class="meta-label">Aesthetic</div>
+        <div class="meta-val">Pixar-style 3D</div>
+      </div>
+      <div class="meta-block">
+        <div class="meta-label">Use With</div>
+        <div class="meta-val">Midjourney · Sora · Higgsfield</div>
+      </div>
+      <div class="meta-block">
+        <div class="meta-label">Re-use</div>
+        <div class="meta-val">Every song, forever</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ════════════ SECTION 01: HOW TO USE ════════════ -->
+<section class="section">
+  <div class="wrap">
+    <div class="s-num"><span class="line"></span>Section 01 · The System</div>
+    <h2>How to use this <em>bible</em>.</h2>
+    <p class="lede">This document is not a description. It is a <strong>reference engine</strong>. You don't read it once and put it away — you keep it open every time you open Midjourney, Sora, or Higgsfield. Every prompt you write starts with copy-pasting from here.</p>
+
+    <div class="world-grid">
+      <div class="world-card">
+        <div class="role">Step 01</div>
+        <h3>Generate the master portrait once</h3>
+        <p>For each of the ten kids, run the <em>Anchor Prompt</em> from their profile until you get a portrait you genuinely love. This is your North Star image. Save it as <code style="background:rgba(255,210,63,0.15);padding:2px 6px;border-radius:3px;color:var(--yellow);">[name]_master.png</code>.</p>
+      </div>
+      <div class="world-card">
+        <div class="role">Step 02</div>
+        <h3>Build expression & action sheets</h3>
+        <p>Pass the master portrait as a reference image (Midjourney <code style="background:rgba(255,210,63,0.15);padding:2px 6px;border-radius:3px;color:var(--yellow);">--cref</code>, Sora image-to-image, or Higgsfield character lock) and run the eight expression prompts and eight action prompts. You now have a 17-image kit per character.</p>
+      </div>
+      <div class="world-card">
+        <div class="role">Step 03</div>
+        <h3>Reference, don't redescribe</h3>
+        <p>For every keyframe in every video, your prompt format is: <em>"[World Boilerplate] + [Shot description] + [reference: master.png]"</em>. Never describe the character in words and hope. The reference image does the heavy lifting.</p>
+      </div>
+      <div class="world-card">
+        <div class="role">Step 04</div>
+        <h3>Quality gate every frame</h3>
+        <p>Before animating any keyframe, hold it next to the master portrait. Hair colour, eye colour, face shape, signature outfit — all must match. If anything has drifted, regenerate. One off-model frame breaks immersion for an entire video.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════ SECTION 02: WORLD RULES ════════════ -->
+<section class="section dark">
+  <div class="wrap">
+    <div class="s-num"><span class="line"></span>Section 02 · World Rules</div>
+    <h2>The universal <em>style anchor</em>.</h2>
+    <p class="lede">Before any individual character: the rules of the world they all live in. Lighting, palette, camera, line quality. Lock these once and every shot — even shots without a character — will read as Konfident Kids.</p>
+
+    <div class="prompt-block">
+      <div class="prompt-label"><span>★ World Boilerplate · paste at top of every image prompt</span><span style="color:var(--yellow-soft); font-weight:500;">required</span></div>
+      <div class="prompt-text">
+        <em>Pixar-style premium 3D family animation, polished cinematic lighting with warm soft key and gentle yellow rim light, golden-hour ambience, vibrant saturated palette anchored on KonfidentKids navy (#0B1A3A) and golden yellow (#FFD23F) with cream highlights, rounded child-friendly proportions, large expressive eyes, soft skin shading, clean rendering with no harsh edges, painterly hand-finished textures, child-safe and welcoming, joyful uplifting mood, 16:9 cinematic frame, depth of field with subtle bokeh, premium streaming family movie quality.</em>
+      </div>
+    </div>
+
+    <div class="neg-prompt">
+      <div class="neg-label">⊘ Universal Negative Prompt · always exclude</div>
+      <p>scary, dark, gritty, photorealistic adult, harsh shadows, sexualised, weapons, violence, low quality, deformed, extra fingers, extra limbs, blurry faces, distorted proportions, generic anime style, flat 2D cartoon, hyperrealistic skin pores, ageing/wrinkles, sad or distressed children, gloomy palette, washed-out colours, oversaturated neon, AI-generated artefacts, watermarks, text overlays, brand logos other than KonfidentKids, copyrighted character likenesses (Pixar/Disney/DreamWorks IP).</p>
+    </div>
+
+    <div class="world-grid">
+      <div class="world-card">
+        <div class="role">★ Palette</div>
+        <h3>Navy & golden yellow lead</h3>
+        <ul>
+          <li>Primary: navy <code style="color:var(--yellow-soft);">#0B1A3A</code> + yellow <code style="color:var(--yellow-soft);">#FFD23F</code></li>
+          <li>Cream/warm white <code style="color:var(--yellow-soft);">#FFF8E7</code> for skies, highlights</li>
+          <li>Coral, teal, mint, soft pink as accent costume colours</li>
+          <li>No neons, no greys, no muddy browns in environments</li>
+        </ul>
+      </div>
+      <div class="world-card">
+        <div class="role">★ Lighting</div>
+        <h3>Golden hour, always</h3>
+        <ul>
+          <li>Soft warm key light (45° upper-front)</li>
+          <li>Gentle yellow rim light from behind for separation</li>
+          <li>Lifted shadows — no deep blacks on faces</li>
+          <li>Subtle dust motes or light particles for magic moments</li>
+        </ul>
+      </div>
+      <div class="world-card">
+        <div class="role">★ Camera</div>
+        <h3>Mostly eye-level, sometimes hero</h3>
+        <ul>
+          <li>Default: eye-level shot at child height (~1.2m)</li>
+          <li>Empowerment beats: slight low-angle (hero shot)</li>
+          <li>Discovery beats: gentle push-in (3–6 second clip)</li>
+          <li>Group shots: wide 16:9, ensemble in soft arc</li>
+        </ul>
+      </div>
+      <div class="world-card">
+        <div class="role">★ Backgrounds</div>
+        <h3>Rounded shapes, soft gradients</h3>
+        <ul>
+          <li>Rolling green meadows, warm pine forests</li>
+          <li>Bright cumulus clouds, soft sky gradients</li>
+          <li>Stylised playgrounds, school classrooms, bedrooms</li>
+          <li>Never sharp/angular geometry — everything rounded</li>
+        </ul>
+      </div>
+      <div class="world-card">
+        <div class="role">★ Proportions</div>
+        <h3>Child-friendly, never adult</h3>
+        <ul>
+          <li>4–4.5 head body ratio (proper kid proportions)</li>
+          <li>Large eyes (1/4 of face vertical), small nose</li>
+          <li>Soft round cheeks, no defined jawline</li>
+          <li>Hands slightly oversized for expression</li>
+        </ul>
+      </div>
+      <div class="world-card">
+        <div class="role">★ Brand Anchors</div>
+        <h3>Repeatable visual identity</h3>
+        <ul>
+          <li>Kai's white star is the singular brand emblem</li>
+          <li>Yellow accents always present somewhere in frame</li>
+          <li>Outdoor scenes default to meadow / forest setting</li>
+          <li>Group ensemble matches Twitter header arrangement</li>
+        </ul>
+      </div>
+    </div>
+
+    <div style="background:var(--navy-soft); padding:32px 36px; border-radius:6px; margin-top:40px; border:1px solid var(--border-dark);">
+      <h4>★ Reference Image Strategy</h4>
+      <p style="color:rgba(255,253,247,0.85); font-size:15px; line-height:1.7;">
+        Generative AI cannot remember your character between sessions. Every prompt is a fresh roll of the dice. The fix is to always pass a locked reference image alongside your prompt. In Midjourney, this is the <code style="background:rgba(255,210,63,0.15); padding:2px 6px; border-radius:3px; color:var(--yellow);">--cref [URL] --cw 100</code> flag (cw = character weight, 100 = maximum). In Sora, drop the master portrait into the image-input slot. In Higgsfield, use the character lock feature. Without a reference, you are gambling. With one, you are directing.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════ SECTION 03: CAST AT A GLANCE ════════════ -->
+<section class="section">
+  <div class="wrap">
+    <div class="s-num"><span class="line"></span>Section 03 · The Cast</div>
+    <h2>Ten kids. <em>One world.</em></h2>
+    <p class="lede">The same ten children appear across every Konfident Kids song — same faces, same outfits, same personalities, scaled across forty videos a year. Audience attachment compounds with every appearance. A kid who knows Kai by heart will watch the next Kai video on autoplay.</p>
+
+    <div class="cast-grid">
+      <div class="cast-card" style="--accent: var(--c-kai);">
+        <div class="ch-num">CHARACTER 05</div>
+        <div class="ch-name">Kai</div>
+        <div class="ch-role">★ Leader</div>
+        <div class="ch-desc">Spiky chestnut hair, red star tee. The mascot. Front and centre on the Twitter header. Steps forward first.</div>
+      </div>
+      <div class="cast-card" style="--accent: var(--c-maya);">
+        <div class="ch-num">CHARACTER 04</div>
+        <div class="ch-name">Maya</div>
+        <div class="ch-role">★ Brave Heart</div>
+        <div class="ch-desc">Curly hair, yellow headband, pink tee, fist in the air. Pure kinetic courage. Leads the chorus.</div>
+      </div>
+      <div class="cast-card" style="--accent: var(--c-ollie);">
+        <div class="ch-num">CHARACTER 09</div>
+        <div class="ch-name">Ollie</div>
+        <div class="ch-role">★ Smart One</div>
+        <div class="ch-desc">Round glasses, blue cap, striped shirt with suspenders. Solves the problem with one raised finger.</div>
+      </div>
+      <div class="cast-card" style="--accent: var(--c-jayden);">
+        <div class="ch-num">CHARACTER 07</div>
+        <div class="ch-name">Jayden</div>
+        <div class="ch-role">★ Dancer</div>
+        <div class="ch-desc">Backwards blue cap, orange tee, big grin. Joy machine. Brings energy to every frame.</div>
+      </div>
+      <div class="cast-card" style="--accent: var(--c-ruby);">
+        <div class="ch-num">CHARACTER 06</div>
+        <div class="ch-name">Ruby</div>
+        <div class="ch-role">★ Reader</div>
+        <div class="ch-desc">Bright red hair, purple hoodie, tablet in hand. The thoughtful one. Quiet strength.</div>
+      </div>
+      <div class="cast-card" style="--accent: var(--c-lily);">
+        <div class="ch-num">CHARACTER 10</div>
+        <div class="ch-name">Lily</div>
+        <div class="ch-role">★ Youngest</div>
+        <div class="ch-desc">Red headband, cloud tee, finger up playfully. The smallest. Pure heart, watches and learns.</div>
+      </div>
+      <div class="cast-card" style="--accent: var(--c-leo);">
+        <div class="ch-num">CHARACTER 03</div>
+        <div class="ch-name">Leo</div>
+        <div class="ch-role">★ Adventurer</div>
+        <div class="ch-desc">Curly brown hair, freckles, teal shirt with suspenders. Tan skin. Falls down, gets back up.</div>
+      </div>
+      <div class="cast-card" style="--accent: var(--c-nova);">
+        <div class="ch-num">CHARACTER 01</div>
+        <div class="ch-name">Nova</div>
+        <div class="ch-role">★ Thinker</div>
+        <div class="ch-desc">Blue bob, round glasses, coral hoodie. Hands at chest. Listens before she speaks.</div>
+      </div>
+      <div class="cast-card" style="--accent: var(--c-finn);">
+        <div class="ch-num">CHARACTER 02</div>
+        <div class="ch-name">Finn</div>
+        <div class="ch-role">★ Cheer</div>
+        <div class="ch-desc">Blonde, blue zip hoodie, arms folded happily. Bright blue eyes. Optimism dressed as a person.</div>
+      </div>
+      <div class="cast-card" style="--accent: var(--c-zane);">
+        <div class="ch-num">CHARACTER 08</div>
+        <div class="ch-name">Zane</div>
+        <div class="ch-role">★ Trendsetter</div>
+        <div class="ch-desc">Mint green hair, light grey tee, hands clasped excitedly. Cool, kind, creative. Brings the style.</div>
+      </div>
+    </div>
+
+    <div class="quality-gate" style="margin-top:48px;">
+      <strong>★ Casting principle</strong>
+      <p>The roles above are <em>defaults</em>, not cages. Any of the ten can be the lead in any video — the magic is the recurring ensemble. But when in doubt, lean into each kid's signature lane. Kai leads. Maya cheers. Ollie thinks. Audiences read the cast before they read the lyrics.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════ SECTION 04: CHARACTER PROFILES ════════════ -->
+<section class="section cream">
+  <div class="wrap">
+    <div class="s-num"><span class="line"></span>Section 04 · The Profiles</div>
+    <h2>Ten kids, in <em>full detail</em>.</h2>
+    <p class="lede">Each profile contains everything you need to lock the character: the anchor description, master portrait views, an eight-emotion expression sheet, an eight-pose action sheet, and the kid's voice on the page. Generate these once. Reuse them forever.</p>
+
+    <!-- ═══ KAI ═══ -->
+    <div class="char-profile" style="--accent: var(--c-kai);">
+      <div class="char-header">
+        <div class="char-badge">
+          <div class="ch-num">CHARACTER 05 · CENTER</div>
+          <div class="ch-name">Kai</div>
+          <div class="ch-role">★ The Leader</div>
+        </div>
+        <div class="char-meta">
+          <p class="tagline">"Try it with me. I'll go first."</p>
+          <span class="lesson">Lesson · Be brave first, others will follow</span>
+          <div class="traits">
+            <span class="trait">Confident</span>
+            <span class="trait">Warm</span>
+            <span class="trait">Encouraging</span>
+            <span class="trait">Steady</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="anchor-block">
+        <div class="anchor-label">★ Anchor description · the locked character</div>
+        <div class="anchor-text">
+          Happy young boy, age 8, spiky chestnut-brown hair styled upward, warm fair skin, large bright brown eyes, soft round cheeks, wide confident smile with a small dimple, wearing a vibrant red short-sleeved t-shirt with a clean white five-point star centred on the chest, blue jeans, white sneakers. Friendly leader energy, premium 3D cartoon mascot character, polished family animation style, child-friendly proportions.
+        </div>
+      </div>
+
+      <div class="sheet-section">
+        <div class="sheet-title">Master Portrait Sheet <span class="pill">3 views · run once</span></div>
+        <div class="sheet-sub">Generate all three from the anchor before anything else. Save as <code>kai_front.png</code>, <code>kai_three_quarter.png</code>, <code>kai_side.png</code>.</div>
+        <div class="sheet-grid cols-3">
+          <div class="sheet-card"><div class="sc-label">01 · Front view</div><div class="sc-text">[Anchor] · facing camera directly, neutral relaxed pose, arms at sides, gentle confident smile, neutral cream background, soft golden hour lighting, premium Pixar 3D portrait, 16:9 frame.</div></div>
+          <div class="sheet-card"><div class="sc-label">02 · Three-quarter</div><div class="sc-text">[Anchor] · three-quarter angle facing slight left, head turned naturally, soft smile, arms relaxed, neutral cream background, warm rim light from upper right, premium 3D portrait.</div></div>
+          <div class="sheet-card"><div class="sc-label">03 · Side profile</div><div class="sc-text">[Anchor] · clean side profile facing left, calm expression, posture upright, neutral cream background, even soft lighting, premium 3D portrait, side view reference shot.</div></div>
+        </div>
+      </div>
+
+      <div class="sheet-section">
+        <div class="sheet-title">Expression Sheet <span class="pill">8 emotions · pass master.png as reference</span></div>
+        <div class="sheet-sub">Use Midjourney <code>--cref</code>, Sora image-to-image, or Higgsfield character lock. Keep the body neutral; vary only face.</div>
+        <div class="sheet-grid cols-4">
+          <div class="sheet-card"><div class="sc-label">★ Happy</div><div class="sc-text">[Anchor] · wide joyful smile, eyes crinkled with delight, eyebrows raised softly, light blush on cheeks.</div></div>
+          <div class="sheet-card"><div class="sc-label">★ Sad</div><div class="sc-text">[Anchor] · gentle downturned mouth, soft glistening eyes, eyebrows pinched upward, small quivering chin, tender — never distressing.</div></div>
+          <div class="sheet-card"><div class="sc-label">★ Surprised</div><div class="sc-text">[Anchor] · mouth open in small "o", eyes wide, eyebrows lifted high, shoulders slightly raised, hands lifting an inch.</div></div>
+          <div class="sheet-card"><div class="sc-label">★ Brave</div><div class="sc-text">[Anchor] · determined set jaw, focused steady gaze, slight nod, mouth firm but kind, light yellow rim light flagging hero moment.</div></div>
+          <div class="sheet-card"><div class="sc-label">★ Worried</div><div class="sc-text">[Anchor] · soft frown, brows knitted together gently, lower lip drawn slightly inward, eyes searching upward, child-friendly concern.</div></div>
+          <div class="sheet-card"><div class="sc-label">★ Proud</div><div class="sc-text">[Anchor] · radiant beaming smile, chest lifted, chin slightly raised, twinkle in eyes, soft golden glow, hero lighting.</div></div>
+          <div class="sheet-card"><div class="sc-label">★ Thinking</div><div class="sc-text">[Anchor] · soft closed-mouth smile, eyes glancing upward to the right, one finger near chin, brow gently arched in curiosity.</div></div>
+          <div class="sheet-card"><div class="sc-label">★ Celebrating</div><div class="sc-text">[Anchor] · open laughing smile, both fists raised, head thrown back slightly, eyes squinting in joy, confetti motes around.</div></div>
+        </div>
+      </div>
+
+      <div class="sheet-section">
+        <div class="sheet-title">Action Sheet <span class="pill">8 poses · same reference</span></div>
+        <div class="sheet-sub">These give you a head-start for any scene. Do not re-roll the character lottery — start from one of these poses and modify.</div>
+        <div class="sheet-grid cols-4">
+          <div class="sheet-card"><div class="sc-label">▸ Standing</div><div class="sc-text">[Anchor] · standing tall, feet shoulder-width, hands relaxed at sides, confident posture, neutral background.</div></div>
+          <div class="sheet-card"><div class="sc-label">▸ Walking</div><div class="sc-text">[Anchor] · mid-stride walking forward, gentle arm swing, smile, slight bounce in step, soft cinematic blur.</div></div>
+          <div class="sheet-card"><div class="sc-label">▸ Sitting</div><div class="sc-text">[Anchor] · sitting cross-legged on grass, leaning slightly forward, hands resting on knees, relaxed smile.</div></div>
+          <div class="sheet-card"><div class="sc-label">▸ Jumping</div><div class="sc-text">[Anchor] · mid-air jump, both arms raised in V-shape, knees tucked up, mouth open in cheer, dust burst at feet.</div></div>
+          <div class="sheet-card"><div class="sc-label">▸ Pointing</div><div class="sc-text">[Anchor] · one arm extended forward, index finger pointing into distance, other hand on hip, eyes following the point.</div></div>
+          <div class="sheet-card"><div class="sc-label">▸ Hugging</div><div class="sc-text">[Anchor] · arms open wide for an incoming hug, warm tender smile, eyes soft, body leaning slightly forward.</div></div>
+          <div class="sheet-card"><div class="sc-label">▸ Dancing</div><div class="sc-text">[Anchor] · mid-dance pose, one arm raised, opposite hip swung, foot lifted, joyful laughing expression.</div></div>
+          <div class="sheet-card"><div class="sc-label">▸ Sleeping</div><div class="sc-text">[Anchor] · lying on side under a soft yellow blanket, eyes closed peacefully, gentle smile, small "z" motif optional.</div></div>
+        </div>
+      </div>
+
+      <div class="stagecraft">
+        <div class="stage-card">
+          <h5>Voice & speaking style</h5>
+          <p>Warm, even tone. Speaks first in any group setting. Uses inclusive language — "we", "let's", "with me". Never shouts. Encourages others before himself. The kid every classroom wishes was the captain.</p>
+        </div>
+        <div class="stage-card">
+          <h5>Signature scene</h5>
+          <p>The hero shot. Low-angle camera, golden rim light, Kai stepping forward from a group while the rest hesitate, looking back over his shoulder with a small nod that says <em>"come on"</em>. This is your climax frame for any "go first" themed song.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ MAYA ═══ -->
+    <div class="char-profile" style="--accent: var(--c-maya);">
+      <div class="char-header">
+        <div class="char-badge">
+          <div class="ch-num">CHARACTER 04</div>
+          <div class="ch-name">Maya</div>
+          <div class="ch-role">★ The Brave Heart</div>
+        </div>
+        <div class="char-meta">
+          <p class="tagline">"I'm scared too. Doing it anyway."</p>
+          <span class="lesson">Lesson · Courage feels like fire — let it lead</span>
+          <div class="traits">
+            <span class="trait">Fearless</span>
+            <span class="trait">Joyful</span>
+            <span class="trait">Loud (in a good way)</span>
+            <span class="trait">Loyal</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="anchor-block">
+        <div class="anchor-label">★ Anchor description · the locked character</div>
+        <div class="anchor-text">
+          Confident young girl, age 8, dark springy curly hair styled out and free, wide bright golden-yellow headband across the top of her head, medium brown skin with a soft warm glow, bright big brown eyes, full radiant cheek-lifting smile showing a tiny gap in her front teeth, wearing a hot pink short-sleeved t-shirt, denim shorts, white trainers. Energetic brave personality, vibrant 3D cartoon family animation style, child-friendly proportions, cinematic warm sunlight.
+        </div>
+      </div>
+
+      <div class="sheet-section">
+        <div class="sheet-title">Master Portrait Sheet <span class="pill">3 views · run once</span></div>
+        <div class="sheet-sub">Save as <code>maya_front.png</code>, <code>maya_three_quarter.png</code>, <code>maya_side.png</code>.</div>
+        <div class="sheet-grid cols-3">
+          <div class="sheet-card"><div class="sc-label">01 · Front view</div><div class="sc-text">[Anchor] · facing camera, neutral confident pose, arms relaxed, big smile, neutral cream background, golden hour lighting.</div></div>
+          <div class="sheet-card"><div class="sc-label">02 · Three-quarter</div><div class="sc-text">[Anchor] · three-quarter angle facing slight right, head turned naturally, smile, hands at sides, warm rim light.</div></div>
+          <div class="sheet-card"><div class="sc-label">03 · Side profile</div><div class="sc-text">[Anchor] · clean side profile, calm bright expression, headband fully visible, neutral background, even lighting.</div></div>
+        </div>
+      </div>
+
+      <div class="sheet-section">
+        <div class="sheet-title">Expression Sheet <span class="pill">8 emotions</span></div>
+        <div class="sheet-grid cols-4">
+          <div class="sheet-card"><div class="sc-label">★ Happy</div><div class="sc-text">[Anchor] · enormous open laughing smile, eyes squeezed in joy, head tilted slightly back, curls bouncing.</div></div>
+          <div class="sheet-card"><div class="sc-label">★ Sad</div><div class="sc-text">[Anchor] · soft frown, eyes lowered with single glistening tear, gentle pout, vulnerable but not distressing.</div></div>
+          <div class="sheet-card"><div class="sc-label">★ Surprised</div><div class="sc-text">[Anchor] · mouth dropped open, eyes huge and round, eyebrows lifted, hands flying up to her cheeks.</div></div>
+          <div class="sheet-card"><div class="sc-label">★ Brave</div><div class="sc-text">[Anchor] · fierce determined grin, jaw set, fist raised in air, eyes fixed forward with fire — signature pose.</div></div>
+          <div class="sheet-card"><div class="sc-label">★ Worried</div><div class="sc-text">[Anchor] · biting lower lip gently, brows pinched, eyes shifting nervously sideways, hand near collar.</div></div>
+          <div class="sheet-card"><div class="sc-label">★ Proud</div><div class="sc-text">[Anchor] · chest lifted, chin up, beaming smile, hands on hips superhero stance, golden rim light.</div></div>
+          <div class="sheet-card"><div class="sc-label">★ Thinking</div><div class="sc-text">[Anchor] · curious smile, eyes glancing upward, one curl twirled around finger, head tilted.</div></div>
+          <div class="sheet-card"><div class="sc-label">★ Celebrating</div><div class="sc-text">[Anchor] · both arms thrown up in victory, jumping mid-air, mouth open in cheer, headband catching the light.</div></div>
+        </div>
+      </div>
+
+      <div class="sheet-section">
+        <div class="sheet-title">Action Sheet <span class="pill">8 poses</span></div>
+        <div class="sheet-grid cols-4">
+          <div class="sheet-card"><div class="sc-label">▸ Standing</div><div class="sc-text">[Anchor] · standing tall, hands on hips, feet apart in confident stance, smile.</div></div>
+          <div class="sheet-card"><div class="sc-label">▸ Walking</div><div class="sc-text">[Anchor] · striding forward with purpose, arms swinging, curls bouncing, big smile.</div></div>
+          <div class="sheet-card"><div class="sc-label">▸ Sitting</div><div class="sc-text">[Anchor] · sitting on a wooden swing or low wall, leaning forward eagerly, ankles crossed.</div></div>
+          <div class="sheet-card"><div class="sc-label">▸ Jumping</div><div class="sc-text">[Anchor] · powerful jump, fist punching upward, opposite arm out for balance, mid-cheer.</div></div>
+          <div class="sheet-card"><div class="sc-label">▸ Pointing</div><div class="sc-text">[Anchor] · arm thrust forward pointing decisively, eyes following, body leaning into the point.</div></div>
+          <div class="sheet-card"><div class="sc-label">▸ Hugging</div><div class="sc-text">[Anchor] · giving a warm bear hug, arms wrapped tight, eyes closed peacefully, soft smile.</div></div>
+          <div class="sheet-card"><div class="sc-label">▸ Dancing</div><div class="sc-text">[Anchor] · twirling mid-spin, arms outstretched, headband flowing, joyful laughing expression.</div></div>
+          <div class="sheet-card"><div class="sc-label">▸ Sleeping</div><div class="sc-text">[Anchor] · curled up under a yellow blanket, headband still on, peaceful sleeping smile.</div></div>
+        </div>
+      </div>
+
+      <div class="stagecraft">
+        <div class="stage-card">
+          <h5>Voice & speaking style</h5>
+          <p>Loud, warm, infectious. Cheers people on. Speaks in exclamations — "Let's GO!", "You got this!". Will absolutely attempt the scary thing first. Has zero off switch. Best friends with Kai.</p>
+        </div>
+        <div class="stage-card">
+          <h5>Signature scene</h5>
+          <p>The fist-in-the-air chorus moment. Centre frame, slight low angle, headband catching golden light, free hand reaching back to pull a hesitant friend forward. Use this as your "courage" hero shot in any anthem song.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ OLLIE ═══ -->
+    <div class="char-profile" style="--accent: var(--c-ollie);">
+      <div class="char-header">
+        <div class="char-badge">
+          <div class="ch-num">CHARACTER 09</div>
+          <div class="ch-name">Ollie</div>
+          <div class="ch-role">★ The Smart One</div>
+        </div>
+        <div class="char-meta">
+          <p class="tagline">"Wait — I think I know how."</p>
+          <span class="lesson">Lesson · Smart is brave too. Curiosity is a superpower</span>
+          <div class="traits">
+            <span class="trait">Curious</span>
+            <span class="trait">Methodical</span>
+            <span class="trait">Witty</span>
+            <span class="trait">Generous with ideas</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="anchor-block">
+        <div class="anchor-label">★ Anchor description · the locked character</div>
+        <div class="anchor-text">
+          Smart young boy, age 9, neat brown hair tucked under a cobalt blue baseball cap worn forward, large round black-rimmed glasses, fair skin with light pink in cheeks, alert blue eyes behind the lenses, gentle thoughtful smile, wearing a horizontally-striped blue and white short-sleeved shirt with charcoal grey suspenders crossing the chest, navy shorts, brown sneakers. Curious genius personality, premium 3D cartoon child, polished cinematic kids style.
+        </div>
+      </div>
+
+      <div class="sheet-section">
+        <div class="sheet-title">Master Portrait Sheet <span class="pill">3 views</span></div>
+        <div class="sheet-sub">Save as <code>ollie_front.png</code>, <code>ollie_three_quarter.png</code>, <code>ollie_side.png</code>. Keep the cap, glasses and suspenders visible in all three.</div>
+        <div class="sheet-grid cols-3">
+          <div class="sheet-card"><div class="sc-label">01 · Front view</div><div class="sc-text">[Anchor] · facing camera, thoughtful gentle smile, hands clasped in front, neutral cream background, soft warm light.</div></div>
+          <div class="sheet-card"><div class="sc-label">02 · Three-quarter</div><div class="sc-text">[Anchor] · three-quarter angle, head tilted slightly in curiosity, glasses catching gentle highlight, soft smile.</div></div>
+          <div class="sheet-card"><div class="sc-label">03 · Side profile</div><div class="sc-text">[Anchor] · clean side profile, cap brim visible in silhouette, glasses arm clearly defined, calm focused expression.</div></div>
+        </div>
+      </div>
+
+      <div class="sheet-section">
+        <div class="sheet-title">Expression Sheet <span class="pill">8 emotions</span></div>
+        <div class="sheet-grid cols-4">
+          <div class="sheet-card"><div class="sc-label">★ Happy</div><div class="sc-text">[Anchor] · bright closed-mouth smile growing into open laugh, eyes crinkled behind glasses, slight glasses-bounce.</div></div>
+          <div class="sheet-card"><div class="sc-label">★ Sad</div><div class="sc-text">[Anchor] · soft downturned mouth, glasses lifted slightly as he wipes an eye, gentle vulnerable expression.</div></div>
+          <div class="sheet-card"><div class="sc-label">★ Surprised</div><div class="sc-text">[Anchor] · mouth open in small "oh!", eyes huge behind glasses, eyebrows shooting above the cap line, finger lifted.</div></div>
+          <div class="sheet-card"><div class="sc-label">★ Brave</div><div class="sc-text">[Anchor] · determined nod, lips pressed in a steady line, glasses pushed up firmly, focused gaze forward.</div></div>
+          <div class="sheet-card"><div class="sc-label">★ Worried</div><div class="sc-text">[Anchor] · brows knitted, biting lower lip, fingers fidgeting with suspenders, eyes glancing sideways.</div></div>
+          <div class="sheet-card"><div class="sc-label">★ Proud</div><div class="sc-text">[Anchor] · radiant beaming smile, chest puffed slightly, thumbs hooked into suspenders, golden rim light.</div></div>
+          <div class="sheet-card"><div class="sc-label">★ Thinking</div><div class="sc-text">[Anchor] · index finger raised, brow furrowed in thought, eyes glancing upward, signature "lightbulb moment" pose.</div></div>
+          <div class="sheet-card"><div class="sc-label">★ Celebrating</div><div class="sc-text">[Anchor] · both fists pumped at his sides, beaming surprised smile, glasses slightly askew with joy, jumping a little.</div></div>
+        </div>
+      </div>
+
+      <div class="sheet-section">
+        <div class="sheet-title">Action Sheet <span class="pill">8 poses</span></div>
+        <div class="sheet-grid cols-4">
+          <div class="sheet-card"><div class="sc-label">▸ Standing</div><div class="sc-text">[Anchor] · standing with hands clasped behind back, polite posture, gentle smile.</div></div>
+          <div class="sheet-card"><div class="sc-label">▸ Walking</div><div class="sc-text">[Anchor] · brisk thoughtful walk, one hand holding a notebook, other adjusting glasses.</div></div>
+          <div class="sheet-card"><div class="sc-label">▸ Sitting</div><div class="sc-text">[Anchor] · cross-legged with a book open in his lap, finger marking a line, fully absorbed.</div></div>
+          <div class="sheet-card"><div class="sc-label">▸ Jumping</div><div class="sc-text">[Anchor] · cap held to head with one hand mid-jump, glasses bouncing, surprised excited smile.</div></div>
+          <div class="sheet-card"><div class="sc-label">▸ Pointing</div><div class="sc-text">[Anchor] · index finger raised in classic "I have an idea" gesture, eyebrow arched, half-smile.</div></div>
+          <div class="sheet-card"><div class="sc-label">▸ Hugging</div><div class="sc-text">[Anchor] · awkwardly sweet sideways hug, glasses pressed slightly against shoulder, gentle smile.</div></div>
+          <div class="sheet-card"><div class="sc-label">▸ Dancing</div><div class="sc-text">[Anchor] · slightly stiff but joyful robotic-style dance, arms in 90-degree angles, big smile, glasses crooked.</div></div>
+          <div class="sheet-card"><div class="sc-label">▸ Sleeping</div><div class="sc-text">[Anchor] · asleep at a desk with book open, glasses askew on his face, peaceful expression.</div></div>
+        </div>
+      </div>
+
+      <div class="stagecraft">
+        <div class="stage-card">
+          <h5>Voice & speaking style</h5>
+          <p>Quiet, precise, often starts with "Actually..." in the gentlest possible way. Asks questions before he answers them. Uses metaphors. The friend who explains the concept the teacher couldn't.</p>
+        </div>
+        <div class="stage-card">
+          <h5>Signature scene</h5>
+          <p>The lightbulb moment. Mid-shot of Ollie pausing, finger lifting, glasses catching a small spark of light, a soft yellow glow forming above his head. Use for any "I figured it out" beat in problem-solving songs.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ JAYDEN ═══ -->
+    <div class="char-profile" style="--accent: var(--c-jayden);">
+      <div class="char-header">
+        <div class="char-badge">
+          <div class="ch-num">CHARACTER 07</div>
+          <div class="ch-name">Jayden</div>
+          <div class="ch-role">★ The Dancer</div>
+        </div>
+        <div class="char-meta">
+          <p class="tagline">"Watch this — you're gonna laugh."</p>
+          <span class="lesson">Lesson · Joy is contagious. Move first, others will join</span>
+          <div class="traits">
+            <span class="trait">Athletic</span>
+            <span class="trait">Funny</span>
+            <span class="trait">Generous</span>
+            <span class="trait">Always moving</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="anchor-block">
+        <div class="anchor-label">★ Anchor description · the locked character</div>
+        <div class="anchor-text">
+          Cheerful young boy, age 9, deep rich brown skin with a healthy warm glow, short black hair tucked under a vibrant blue baseball cap worn backwards, bright dark brown eyes, huge bright white toothy grin, wearing a sunset orange short-sleeved t-shirt, dark blue cargo shorts, white-and-orange high-top sneakers. Athletic energetic personality, premium 3D cartoon child character, polished textures, cinematic playful lighting.
+        </div>
+      </div>
+
+      <div class="sheet-section">
+        <div class="sheet-title">Master Portrait Sheet <span class="pill">3 views</span></div>
+        <div class="sheet-sub">Save as <code>jayden_front.png</code>, <code>jayden_three_quarter.png</code>, <code>jayden_side.png</code>. Cap is always backwards — never forwards.</div>
+        <div class="sheet-grid cols-3">
+          <div class="sheet-card"><div class="sc-label">01 · Front view</div><div class="sc-text">[Anchor] · facing camera, big grin, thumbs up, neutral cream background, warm cinematic light.</div></div>
+          <div class="sheet-card"><div class="sc-label">02 · Three-quarter</div><div class="sc-text">[Anchor] · three-quarter angle, head turned with a playful smirk, one hand near brim of backwards cap.</div></div>
+          <div class="sheet-card"><div class="sc-label">03 · Side profile</div><div class="sc-text">[Anchor] · clean side profile, backwards cap fully visible, energetic posture, calm focused expression.</div></div>
+        </div>
+      </div>
+
+      <div class="sheet-section">
+        <div class="sheet-title">Expression Sheet <span class="pill">8 emotions</span></div>
+        <div class="sheet-grid cols-4">
+          <div class="sheet-card"><div class="sc-label">★ Happy</div><div class="sc-text">[Anchor] · enormous laughing grin, head tilted back, eyes squeezed shut with joy, infectious vibe.</div></div>
+          <div class="sheet-card"><div class="sc-label">★ Sad</div><div class="sc-text">[Anchor] · cap brim shadowing eyes, soft downturned mouth, hands in pockets, tender vulnerable look.</div></div>
+          <div class="sheet-card"><div class="sc-label">★ Surprised</div><div class="sc-text">[Anchor] · mouth wide open, eyebrows shot up, both hands up in "whaaat?" gesture, comedic exaggeration.</div></div>
+          <div class="sheet-card"><div class="sc-label">★ Brave</div><div class="sc-text">[Anchor] · serious focused look, fist clenched at side, jaw set, ready stance, hero rim light.</div></div>
+          <div class="sheet-card"><div class="sc-label">★ Worried</div><div class="sc-text">[Anchor] · wincing slightly, biting inner cheek, one hand rubbing back of cap nervously.</div></div>
+          <div class="sheet-card"><div class="sc-label">★ Proud</div><div class="sc-text">[Anchor] · cocky smile, both thumbs pointing at himself, eyebrows raised, swagger.</div></div>
+          <div class="sheet-card"><div class="sc-label">★ Thinking</div><div class="sc-text">[Anchor] · finger tapping chin, eyes narrowed in mischievous plotting, half-smile.</div></div>
+          <div class="sheet-card"><div class="sc-label">★ Celebrating</div><div class="sc-text">[Anchor] · mid-celebration dance move, both hands raised, cap askew, mouth open in shout of joy.</div></div>
+        </div>
+      </div>
+
+      <div class="sheet-section">
+        <div class="sheet-title">Action Sheet <span class="pill">8 poses</span></div>
+        <div class="sheet-grid cols-4">
+          <div class="sheet-card"><div class="sc-label">▸ Standing</div><div class="sc-text">[Anchor] · cool relaxed stance, one hand in pocket, weight on one leg, confident smile.</div></div>
+          <div class="sheet-card"><div class="sc-label">▸ Walking</div><div class="sc-text">[Anchor] · easy strut with rhythm, one hand swinging loose, head bobbing slightly to internal beat.</div></div>
+          <div class="sheet-card"><div class="sc-label">▸ Sitting</div><div class="sc-text">[Anchor] · sitting on a low wall with one knee up, leaning back on palms, cap shading eyes.</div></div>
+          <div class="sheet-card"><div class="sc-label">▸ Jumping</div><div class="sc-text">[Anchor] · explosive jump with knees tucked, both arms thrown up, mouth wide open in a "whoo!".</div></div>
+          <div class="sheet-card"><div class="sc-label">▸ Pointing</div><div class="sc-text">[Anchor] · finger gun pointing at camera, wink, half-smile, playful.</div></div>
+          <div class="sheet-card"><div class="sc-label">▸ Hugging</div><div class="sc-text">[Anchor] · giving a side bro-hug with one arm, big grin, casual warmth.</div></div>
+          <div class="sheet-card"><div class="sc-label">▸ Dancing</div><div class="sc-text">[Anchor] · breakdance freeze pose, one hand on the ground, legs extended sideways, signature move.</div></div>
+          <div class="sheet-card"><div class="sc-label">▸ Sleeping</div><div class="sc-text">[Anchor] · sprawled on his back, cap covering his face, one arm flung over his stomach, peaceful.</div></div>
+        </div>
+      </div>
+
+      <div class="stagecraft">
+        <div class="stage-card">
+          <h5>Voice & speaking style</h5>
+          <p>Loud, full of laughter, drops jokes mid-sentence. Calls people "bro" and "fam" affectionately. Beatboxes to fill silence. Owns every group dance scene without trying.</p>
+        </div>
+        <div class="stage-card">
+          <h5>Signature scene</h5>
+          <p>The dance break. Mid-song, the whole crew is in a meadow — Jayden launches into a freeze and the camera swings around him. Use for the "release" beat in any song with a chorus drop.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ RUBY ═══ -->
+    <div class="char-profile" style="--accent: var(--c-ruby);">
+      <div class="char-header">
+        <div class="char-badge">
+          <div class="ch-num">CHARACTER 06</div>
+          <div class="ch-name">Ruby</div>
+          <div class="ch-role">★ The Reader</div>
+        </div>
+        <div class="char-meta">
+          <p class="tagline">"Let me show you something I found."</p>
+          <span class="lesson">Lesson · Quiet kids change the world too</span>
+          <div class="traits">
+            <span class="trait">Thoughtful</span>
+            <span class="trait">Imaginative</span>
+            <span class="trait">Quietly brave</span>
+            <span class="trait">Detail-noticer</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="anchor-block">
+        <div class="anchor-label">★ Anchor description · the locked character</div>
+        <div class="anchor-text">
+          Cute young girl, age 7, shoulder-length bright fiery red hair with soft natural waves and a slight middle parting, pale skin with light freckles dusted across the bridge of her nose, large luminous blue eyes, sweet gentle close-mouthed smile, wearing a soft purple zip-up hoodie with the hood down, holding a small lavender tablet device flat in both hands at chest height, dark leggings, white sneakers. Smart creative thoughtful personality, premium 3D cartoon child style, cinematic warm lighting.
+        </div>
+      </div>
+
+      <div class="sheet-section">
+        <div class="sheet-title">Master Portrait Sheet <span class="pill">3 views</span></div>
+        <div class="sheet-sub">Save as <code>ruby_front.png</code>, <code>ruby_three_quarter.png</code>, <code>ruby_side.png</code>. Tablet visible in front and three-quarter views; absent in side profile.</div>
+        <div class="sheet-grid cols-3">
+          <div class="sheet-card"><div class="sc-label">01 · Front view</div><div class="sc-text">[Anchor] · facing camera, holding tablet at chest, gentle smile, neutral cream background, warm soft light.</div></div>
+          <div class="sheet-card"><div class="sc-label">02 · Three-quarter</div><div class="sc-text">[Anchor] · three-quarter angle, looking up from tablet with a small curious smile, soft warm rim light.</div></div>
+          <div class="sheet-card"><div class="sc-label">03 · Side profile</div><div class="sc-text">[Anchor] · clean side profile, hair flowing softly, no tablet, calm peaceful expression.</div></div>
+        </div>
+      </div>
+
+      <div class="sheet-section">
+        <div class="sheet-title">Expression Sheet <span class="pill">8 emotions</span></div>
+        <div class="sheet-grid cols-4">
+          <div class="sheet-card"><div class="sc-label">★ Happy</div><div class="sc-text">[Anchor] · sweet contented smile, soft eyes shining, cheeks lightly flushed pink.</div></div>
+          <div class="sheet-card"><div class="sc-label">★ Sad</div><div class="sc-text">[Anchor] · big quiet eyes welling up gently, hood half-pulled up, soft downturned lips.</div></div>
+          <div class="sheet-card"><div class="sc-label">★ Surprised</div><div class="sc-text">[Anchor] · eyes wide and round in wonder, mouth slightly parted, tablet forgotten in one hand.</div></div>
+          <div class="sheet-card"><div class="sc-label">★ Brave</div><div class="sc-text">[Anchor] · quiet steady gaze, lips pressed in resolve, hood up like armour, fist clutching the tablet.</div></div>
+          <div class="sheet-card"><div class="sc-label">★ Worried</div><div class="sc-text">[Anchor] · brows softly furrowed, biting bottom lip, eyes glancing down at tablet for reassurance.</div></div>
+          <div class="sheet-card"><div class="sc-label">★ Proud</div><div class="sc-text">[Anchor] · shy radiant smile, looking up at the camera, tablet held to her chest like a treasure.</div></div>
+          <div class="sheet-card"><div class="sc-label">★ Thinking</div><div class="sc-text">[Anchor] · gazing into middle distance, eyes lit with imagination, soft smile, slight head tilt.</div></div>
+          <div class="sheet-card"><div class="sc-label">★ Celebrating</div><div class="sc-text">[Anchor] · quiet but radiant joy, both hands up gently, eyes squeezed shut in contentment.</div></div>
+        </div>
+      </div>
+
+      <div class="sheet-section">
+        <div class="sheet-title">Action Sheet <span class="pill">8 poses</span></div>
+        <div class="sheet-grid cols-4">
+          <div class="sheet-card"><div class="sc-label">▸ Standing</div><div class="sc-text">[Anchor] · standing softly, tablet held against chest with both hands, gentle smile.</div></div>
+          <div class="sheet-card"><div class="sc-label">▸ Walking</div><div class="sc-text">[Anchor] · walking slowly while reading tablet, soft smile, hair flowing slightly.</div></div>
+          <div class="sheet-card"><div class="sc-label">▸ Sitting</div><div class="sc-text">[Anchor] · sitting under a tree with knees up, tablet balanced on knees, fully absorbed.</div></div>
+          <div class="sheet-card"><div class="sc-label">▸ Jumping</div><div class="sc-text">[Anchor] · gentle hop of joy, tablet hugged to chest, laughter, hair lifting.</div></div>
+          <div class="sheet-card"><div class="sc-label">▸ Pointing</div><div class="sc-text">[Anchor] · pointing at her tablet screen with a small "look at this" smile, eyes lit up.</div></div>
+          <div class="sheet-card"><div class="sc-label">▸ Hugging</div><div class="sc-text">[Anchor] · soft tender hug, tablet still tucked under one arm, eyes closed peacefully.</div></div>
+          <div class="sheet-card"><div class="sc-label">▸ Dancing</div><div class="sc-text">[Anchor] · gentle twirl, hair fanning out, tablet held to chest, eyes closed in delight.</div></div>
+          <div class="sheet-card"><div class="sc-label">▸ Sleeping</div><div class="sc-text">[Anchor] · curled up reading-lamp-lit on a beanbag, tablet on her tummy, peaceful smile.</div></div>
+        </div>
+      </div>
+
+      <div class="stagecraft">
+        <div class="stage-card">
+          <h5>Voice & speaking style</h5>
+          <p>Soft, careful, descriptive. Uses unusual words ("magnificent", "whisper-quiet"). Reads things aloud from her tablet. Her bravery is internal — by the bridge of every song, she's the one who says the thing nobody else would.</p>
+        </div>
+        <div class="stage-card">
+          <h5>Signature scene</h5>
+          <p>The reveal moment. Close-up on Ruby turning her tablet toward another character with a soft "look", warm yellow glow from the screen lighting her face. Use for "discovery" or "I have proof" beats.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ LILY ═══ -->
+    <div class="char-profile" style="--accent: var(--c-lily);">
+      <div class="char-header">
+        <div class="char-badge">
+          <div class="ch-num">CHARACTER 10</div>
+          <div class="ch-name">Lily</div>
+          <div class="ch-role">★ The Youngest</div>
+        </div>
+        <div class="char-meta">
+          <p class="tagline">"I'm only little, but I noticed."</p>
+          <span class="lesson">Lesson · Small voices matter. You're old enough to start</span>
+          <div class="traits">
+            <span class="trait">Sweet</span>
+            <span class="trait">Observant</span>
+            <span class="trait">Honest</span>
+            <span class="trait">Brave in tiny ways</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="anchor-block">
+        <div class="anchor-label">★ Anchor description · the locked character</div>
+        <div class="anchor-text">
+          Adorable little girl, age 6, light golden-brown hair in soft natural waves down past her shoulders, vibrant red fabric headband across the top, fair skin with warm pink cheeks, large luminous bright eyes (hazel/light brown), small button nose, sweet innocent smile, wearing a simple white short-sleeved t-shirt with a friendly soft blue cartoon cloud printed across the chest, denim shorts with rolled cuffs, white sandals. Sweet curious innocent personality, premium 3D cartoon child character, soft cinematic lighting, child-friendly proportions slightly more compact than the older kids.
+        </div>
+      </div>
+
+      <div class="sheet-section">
+        <div class="sheet-title">Master Portrait Sheet <span class="pill">3 views</span></div>
+        <div class="sheet-sub">Save as <code>lily_front.png</code>, <code>lily_three_quarter.png</code>, <code>lily_side.png</code>. Lily is visibly the smallest in any group shot.</div>
+        <div class="sheet-grid cols-3">
+          <div class="sheet-card"><div class="sc-label">01 · Front view</div><div class="sc-text">[Anchor] · facing camera, sweet smile, finger raised playfully, neutral cream background, soft warm light.</div></div>
+          <div class="sheet-card"><div class="sc-label">02 · Three-quarter</div><div class="sc-text">[Anchor] · three-quarter angle, head tilted curiously, small smile, headband fully visible.</div></div>
+          <div class="sheet-card"><div class="sc-label">03 · Side profile</div><div class="sc-text">[Anchor] · clean side profile, headband on top, calm peaceful expression, neutral background.</div></div>
+        </div>
+      </div>
+
+      <div class="sheet-section">
+        <div class="sheet-title">Expression Sheet <span class="pill">8 emotions</span></div>
+        <div class="sheet-grid cols-4">
+          <div class="sheet-card"><div class="sc-label">★ Happy</div><div class="sc-text">[Anchor] · giggling smile, eyes squeezed shut, hands clasped together near her cheek in delight.</div></div>
+          <div class="sheet-card"><div class="sc-label">★ Sad</div><div class="sc-text">[Anchor] · soft pout, single tear forming, headband slightly askew, gentle vulnerable look.</div></div>
+          <div class="sheet-card"><div class="sc-label">★ Surprised</div><div class="sc-text">[Anchor] · mouth round in tiny "ooh!", huge sparkly eyes, hands flying to mouth.</div></div>
+          <div class="sheet-card"><div class="sc-label">★ Brave</div><div class="sc-text">[Anchor] · tiny determined frown, fists at her sides, headband catching light, planting feet firmly.</div></div>
+          <div class="sheet-card"><div class="sc-label">★ Worried</div><div class="sc-text">[Anchor] · clutching hem of t-shirt, eyes lowered, small frown, looking up nervously at older kids.</div></div>
+          <div class="sheet-card"><div class="sc-label">★ Proud</div><div class="sc-text">[Anchor] · tiny radiant beam, both hands holding something small up to camera, glow of pride.</div></div>
+          <div class="sheet-card"><div class="sc-label">★ Thinking</div><div class="sc-text">[Anchor] · finger pressed to chin, head tilted, eyes wide in genuine wondering, signature pose.</div></div>
+          <div class="sheet-card"><div class="sc-label">★ Celebrating</div><div class="sc-text">[Anchor] · spinning in circles with arms out, hair and headband flowing, pure unfiltered joy.</div></div>
+        </div>
+      </div>
+
+      <div class="sheet-section">
+        <div class="sheet-title">Action Sheet <span class="pill">8 poses</span></div>
+        <div class="sheet-grid cols-4">
+          <div class="sheet-card"><div class="sc-label">▸ Standing</div><div class="sc-text">[Anchor] · standing with finger up playfully, slight tippy-toe, smile.</div></div>
+          <div class="sheet-card"><div class="sc-label">▸ Walking</div><div class="sc-text">[Anchor] · skipping along, headband bouncing, holding an older kid's hand offscreen.</div></div>
+          <div class="sheet-card"><div class="sc-label">▸ Sitting</div><div class="sc-text">[Anchor] · sitting in the grass with legs out front, picking flowers, soft smile.</div></div>
+          <div class="sheet-card"><div class="sc-label">▸ Jumping</div><div class="sc-text">[Anchor] · tiny puddle-jump pose, both feet off ground, hair flying up, giggling.</div></div>
+          <div class="sheet-card"><div class="sc-label">▸ Pointing</div><div class="sc-text">[Anchor] · pointing upward with bright excitement, tiny finger raised, eyes wide.</div></div>
+          <div class="sheet-card"><div class="sc-label">▸ Hugging</div><div class="sc-text">[Anchor] · hugging an older kid around the waist, head tucked into their side, content smile.</div></div>
+          <div class="sheet-card"><div class="sc-label">▸ Dancing</div><div class="sc-text">[Anchor] · twirling in a circle with arms wide, dress-skirt-style hem flaring, joyful.</div></div>
+          <div class="sheet-card"><div class="sc-label">▸ Sleeping</div><div class="sc-text">[Anchor] · curled up under a yellow blanket, headband on, holding a small plush toy, peaceful.</div></div>
+        </div>
+      </div>
+
+      <div class="stagecraft">
+        <div class="stage-card">
+          <h5>Voice & speaking style</h5>
+          <p>Soft, sweet, sometimes a slight lisp. Asks "why?" a lot. Says exactly what she sees. Often delivers the song's tenderest line — the unexpected truth from the smallest mouth.</p>
+        </div>
+        <div class="stage-card">
+          <h5>Signature scene</h5>
+          <p>The "noticed it first" moment. Lily lifting one finger and pointing at something the older kids have missed, eyes wide, headband glowing in golden light. Use as the inciting visual on songs about empathy or speaking up.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ LEO ═══ -->
+    <div class="char-profile" style="--accent: var(--c-leo);">
+      <div class="char-header">
+        <div class="char-badge">
+          <div class="ch-num">CHARACTER 03</div>
+          <div class="ch-name">Leo</div>
+          <div class="ch-role">★ The Adventurer</div>
+        </div>
+        <div class="char-meta">
+          <p class="tagline">"That didn't work. Let's try it different."</p>
+          <span class="lesson">Lesson · Try, fall, laugh, try again. That's bravery</span>
+          <div class="traits">
+            <span class="trait">Resilient</span>
+            <span class="trait">Playful</span>
+            <span class="trait">Curious</span>
+            <span class="trait">Forgiving (of himself)</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="anchor-block">
+        <div class="anchor-label">★ Anchor description · the locked character</div>
+        <div class="anchor-text">
+          Adorable young boy, age 8, medium-length curly chocolate-brown hair tousled and free, warm tan skin with a healthy outdoor glow, scattered freckles across his nose and cheeks, big lively brown eyes, soft easy smile with a small chip in one front tooth, wearing a teal blue short-sleeved button-up shirt with the top button open and dark grey suspenders crossed over the chest, brown shorts, scuffed adventure boots. Playful adventurous resilient personality, premium 3D cartoon child, expressive face, polished cinematic kids animation textures.
+        </div>
+      </div>
+
+      <div class="sheet-section">
+        <div class="sheet-title">Master Portrait Sheet <span class="pill">3 views</span></div>
+        <div class="sheet-sub">Save as <code>leo_front.png</code>, <code>leo_three_quarter.png</code>, <code>leo_side.png</code>. Freckles must remain visible across all three.</div>
+        <div class="sheet-grid cols-3">
+          <div class="sheet-card"><div class="sc-label">01 · Front view</div><div class="sc-text">[Anchor] · facing camera, easy soft smile, hands tucked into pockets, neutral cream background.</div></div>
+          <div class="sheet-card"><div class="sc-label">02 · Three-quarter</div><div class="sc-text">[Anchor] · three-quarter angle, looking off slightly with a curious half-smile, freckles catching light.</div></div>
+          <div class="sheet-card"><div class="sc-label">03 · Side profile</div><div class="sc-text">[Anchor] · clean side profile, curly hair silhouette clearly defined, calm focused expression.</div></div>
+        </div>
+      </div>
+
+      <div class="sheet-section">
+        <div class="sheet-title">Expression Sheet <span class="pill">8 emotions</span></div>
+        <div class="sheet-grid cols-4">
+          <div class="sheet-card"><div class="sc-label">★ Happy</div><div class="sc-text">[Anchor] · open laughing grin, eyes crinkled, head thrown back slightly, curls bouncing.</div></div>
+          <div class="sheet-card"><div class="sc-label">★ Sad</div><div class="sc-text">[Anchor] · scuffed knees, sitting hunched, soft frown, eyes lowered, suspender slipping off shoulder.</div></div>
+          <div class="sheet-card"><div class="sc-label">★ Surprised</div><div class="sc-text">[Anchor] · eyebrows up high, mouth in soft "oh!", curls bouncing as he reels back, hands raised.</div></div>
+          <div class="sheet-card"><div class="sc-label">★ Brave</div><div class="sc-text">[Anchor] · determined squint, jaw set, dirt smudge on cheek, suspenders pulled straight, ready stance.</div></div>
+          <div class="sheet-card"><div class="sc-label">★ Worried</div><div class="sc-text">[Anchor] · biting lower lip, hands clutching suspenders, eyes glancing nervously sideways.</div></div>
+          <div class="sheet-card"><div class="sc-label">★ Proud</div><div class="sc-text">[Anchor] · radiant beam, hands on hips superhero-style, curls catching golden light.</div></div>
+          <div class="sheet-card"><div class="sc-label">★ Thinking</div><div class="sc-text">[Anchor] · finger tapping cheek, eyes glancing up to one side, plotting smile.</div></div>
+          <div class="sheet-card"><div class="sc-label">★ Celebrating</div><div class="sc-text">[Anchor] · triumphant arms-up cheer, head tilted back, curls bouncing, mouth wide in laughter.</div></div>
+        </div>
+      </div>
+
+      <div class="sheet-section">
+        <div class="sheet-title">Action Sheet <span class="pill">8 poses</span></div>
+        <div class="sheet-grid cols-4">
+          <div class="sheet-card"><div class="sc-label">▸ Standing</div><div class="sc-text">[Anchor] · standing with one foot up on a low rock, hands on knee, explorer pose.</div></div>
+          <div class="sheet-card"><div class="sc-label">▸ Walking</div><div class="sc-text">[Anchor] · brisk hike-style walk, stick in hand, looking around with curiosity.</div></div>
+          <div class="sheet-card"><div class="sc-label">▸ Sitting</div><div class="sc-text">[Anchor] · sitting cross-legged on a tree stump, examining something in cupped hands.</div></div>
+          <div class="sheet-card"><div class="sc-label">▸ Jumping</div><div class="sc-text">[Anchor] · mid-air leap over an obstacle, one arm out for balance, focused face.</div></div>
+          <div class="sheet-card"><div class="sc-label">▸ Pointing</div><div class="sc-text">[Anchor] · pointing toward a horizon with eager smile, one hand cupped over eyes scout-style.</div></div>
+          <div class="sheet-card"><div class="sc-label">▸ Hugging</div><div class="sc-text">[Anchor] · giving a strong friendly hug, eyes warmly closed, suspenders pressed against partner.</div></div>
+          <div class="sheet-card"><div class="sc-label">▸ Dancing</div><div class="sc-text">[Anchor] · goofy energetic dance, knees bent, arms loose, mouth laughing wide.</div></div>
+          <div class="sheet-card"><div class="sc-label">▸ Sleeping</div><div class="sc-text">[Anchor] · sprawled in the grass under a tree, suspenders loosened, peaceful smile, hands behind head.</div></div>
+        </div>
+      </div>
+
+      <div class="stagecraft">
+        <div class="stage-card">
+          <h5>Voice & speaking style</h5>
+          <p>Earthy, fast-talking, often out of breath from running. Uses words like "actually" and "watch this" and "oops". Falls down a lot, gets up faster. The kid every "try again" song was made for.</p>
+        </div>
+        <div class="stage-card">
+          <h5>Signature scene</h5>
+          <p>The dust-yourself-off shot. Leo on the ground, scuffed knees, looking up — then a small grin spreading across his face as he plants his hands and pushes back up. Use for any "fall and rise" lyrical beat.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ NOVA ═══ -->
+    <div class="char-profile" style="--accent: var(--c-nova);">
+      <div class="char-header">
+        <div class="char-badge">
+          <div class="ch-num">CHARACTER 01</div>
+          <div class="ch-name">Nova</div>
+          <div class="ch-role">★ The Thinker</div>
+        </div>
+        <div class="char-meta">
+          <p class="tagline">"Listen first. Then I'll know what to say."</p>
+          <span class="lesson">Lesson · Listen first, then speak. Kindness is clever</span>
+          <div class="traits">
+            <span class="trait">Reflective</span>
+            <span class="trait">Empathic</span>
+            <span class="trait">Insightful</span>
+            <span class="trait">Calm under pressure</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="anchor-block">
+        <div class="anchor-label">★ Anchor description · the locked character</div>
+        <div class="anchor-text">
+          Cute young girl, age 8, short sleek straight blue bob haircut with a soft side parting falling just past the ears, large round black-rimmed glasses, fair skin with a pale rose blush on cheeks, intelligent warm hazel eyes behind the lenses, kind closed-mouth smile, wearing an oversized soft coral-red zip-up hoodie with sleeves slightly past the wrists, hands placed lightly together at chest level in a gentle gesture, dark leggings, cream-coloured trainers. Curious kind quietly clever personality, vibrant 3D cartoon child character, premium family animation style, soft cinematic lighting, polished textures.
+        </div>
+      </div>
+
+      <div class="sheet-section">
+        <div class="sheet-title">Master Portrait Sheet <span class="pill">3 views</span></div>
+        <div class="sheet-sub">Save as <code>nova_front.png</code>, <code>nova_three_quarter.png</code>, <code>nova_side.png</code>. Glasses always present.</div>
+        <div class="sheet-grid cols-3">
+          <div class="sheet-card"><div class="sc-label">01 · Front view</div><div class="sc-text">[Anchor] · facing camera, hands gently clasped at chest, soft warm smile, neutral cream background.</div></div>
+          <div class="sheet-card"><div class="sc-label">02 · Three-quarter</div><div class="sc-text">[Anchor] · three-quarter angle, head tilted slightly in listening, glasses catching gentle highlight.</div></div>
+          <div class="sheet-card"><div class="sc-label">03 · Side profile</div><div class="sc-text">[Anchor] · clean side profile, blue bob silhouette clear, glasses arm visible, calm focused expression.</div></div>
+        </div>
+      </div>
+
+      <div class="sheet-section">
+        <div class="sheet-title">Expression Sheet <span class="pill">8 emotions</span></div>
+        <div class="sheet-grid cols-4">
+          <div class="sheet-card"><div class="sc-label">★ Happy</div><div class="sc-text">[Anchor] · soft glowing smile that grows into a closed-eyed laugh, glasses lifting slightly with cheeks.</div></div>
+          <div class="sheet-card"><div class="sc-label">★ Sad</div><div class="sc-text">[Anchor] · gentle frown, glasses slightly dipped, soft eyes glistening, hood half-lifted as comfort.</div></div>
+          <div class="sheet-card"><div class="sc-label">★ Surprised</div><div class="sc-text">[Anchor] · mouth small "oh", eyebrows lifted above glasses frames, hand near her lips.</div></div>
+          <div class="sheet-card"><div class="sc-label">★ Brave</div><div class="sc-text">[Anchor] · quiet steady gaze, glasses pushed up firmly, lips set in a soft determined line.</div></div>
+          <div class="sheet-card"><div class="sc-label">★ Worried</div><div class="sc-text">[Anchor] · eyebrows pinched, fingertips tucked into hoodie cuffs, eyes searching for reassurance.</div></div>
+          <div class="sheet-card"><div class="sc-label">★ Proud</div><div class="sc-text">[Anchor] · serene radiant smile, hands clasped at heart, soft yellow glow on her face.</div></div>
+          <div class="sheet-card"><div class="sc-label">★ Thinking</div><div class="sc-text">[Anchor] · index finger pressed to lips, eyes glancing upward, glasses catching highlight, signature pose.</div></div>
+          <div class="sheet-card"><div class="sc-label">★ Celebrating</div><div class="sc-text">[Anchor] · gentle laughing surprise, hands lifting in delight, glasses askew, hoodie hood bouncing.</div></div>
+        </div>
+      </div>
+
+      <div class="sheet-section">
+        <div class="sheet-title">Action Sheet <span class="pill">8 poses</span></div>
+        <div class="sheet-grid cols-4">
+          <div class="sheet-card"><div class="sc-label">▸ Standing</div><div class="sc-text">[Anchor] · standing with hands gently clasped, posture upright but relaxed, soft smile.</div></div>
+          <div class="sheet-card"><div class="sc-label">▸ Walking</div><div class="sc-text">[Anchor] · thoughtful walk, hands tucked into hoodie pocket, gentle smile.</div></div>
+          <div class="sheet-card"><div class="sc-label">▸ Sitting</div><div class="sc-text">[Anchor] · sitting on a windowsill with knees up, chin resting on knees, watching outside.</div></div>
+          <div class="sheet-card"><div class="sc-label">▸ Jumping</div><div class="sc-text">[Anchor] · gentle joyful hop, glasses bouncing, both hands raised in soft cheer.</div></div>
+          <div class="sheet-card"><div class="sc-label">▸ Pointing</div><div class="sc-text">[Anchor] · index finger raised gently, half-smile, head tilted in a "have you considered" gesture.</div></div>
+          <div class="sheet-card"><div class="sc-label">▸ Hugging</div><div class="sc-text">[Anchor] · soft sincere hug, glasses pressed against shoulder, eyes closed, peaceful smile.</div></div>
+          <div class="sheet-card"><div class="sc-label">▸ Dancing</div><div class="sc-text">[Anchor] · gentle swaying dance, eyes closed, glasses catching warm light, hood softly bouncing.</div></div>
+          <div class="sheet-card"><div class="sc-label">▸ Sleeping</div><div class="sc-text">[Anchor] · curled up reading a book that has fallen onto her chest, glasses on pillow beside her.</div></div>
+        </div>
+      </div>
+
+      <div class="stagecraft">
+        <div class="stage-card">
+          <h5>Voice & speaking style</h5>
+          <p>Calm, measured, often phrases things as questions ("Could it be...?", "What if we...?"). Listens for two beats longer than anyone else before speaking. The peacemaker. Often delivers the lyrical resolution.</p>
+        </div>
+        <div class="stage-card">
+          <h5>Signature scene</h5>
+          <p>The pause-and-realise shot. Mid-conflict between other characters, Nova's hand lifts gently, the room quietens, her glasses catch the light, and she says the thing that lands. Use for "the breakthrough" beat.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ FINN ═══ -->
+    <div class="char-profile" style="--accent: var(--c-finn);">
+      <div class="char-header">
+        <div class="char-badge">
+          <div class="ch-num">CHARACTER 02</div>
+          <div class="ch-name">Finn</div>
+          <div class="ch-role">★ The Cheer</div>
+        </div>
+        <div class="char-meta">
+          <p class="tagline">"Today is gonna be a good one. I can tell."</p>
+          <span class="lesson">Lesson · Optimism is a choice you make every morning</span>
+          <div class="traits">
+            <span class="trait">Sunny</span>
+            <span class="trait">Encouraging</span>
+            <span class="trait">Resilient</span>
+            <span class="trait">Loyal friend</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="anchor-block">
+        <div class="anchor-label">★ Anchor description · the locked character</div>
+        <div class="anchor-text">
+          Cheerful young boy, age 8, short neatly styled blonde hair with a slight sweep to one side, fair skin with a healthy peachy glow, bright blue eyes that crinkle at the corners when he smiles, wide infectious joyful smile, wearing a sky blue zip-up hoodie open at the front over a clean white t-shirt, arms folded happily across his chest, blue jeans, white sneakers. Energetic optimistic personality, vibrant 3D cartoon child character, polished family animation style, high detail, cinematic lighting.
+        </div>
+      </div>
+
+      <div class="sheet-section">
+        <div class="sheet-title">Master Portrait Sheet <span class="pill">3 views</span></div>
+        <div class="sheet-sub">Save as <code>finn_front.png</code>, <code>finn_three_quarter.png</code>, <code>finn_side.png</code>.</div>
+        <div class="sheet-grid cols-3">
+          <div class="sheet-card"><div class="sc-label">01 · Front view</div><div class="sc-text">[Anchor] · facing camera, arms folded happily, beaming smile, neutral cream background, warm soft light.</div></div>
+          <div class="sheet-card"><div class="sc-label">02 · Three-quarter</div><div class="sc-text">[Anchor] · three-quarter angle, weight slightly shifted, big grin, hoodie zipper catching highlight.</div></div>
+          <div class="sheet-card"><div class="sc-label">03 · Side profile</div><div class="sc-text">[Anchor] · clean side profile, blonde hair silhouette neat, calm bright expression, neutral background.</div></div>
+        </div>
+      </div>
+
+      <div class="sheet-section">
+        <div class="sheet-title">Expression Sheet <span class="pill">8 emotions</span></div>
+        <div class="sheet-grid cols-4">
+          <div class="sheet-card"><div class="sc-label">★ Happy</div><div class="sc-text">[Anchor] · enormous open smile, eyes crinkled completely shut with joy, head tilted slightly back.</div></div>
+          <div class="sheet-card"><div class="sc-label">★ Sad</div><div class="sc-text">[Anchor] · soft frown, blue eyes shimmering, hands tucked into hoodie pocket, gentle vulnerable look.</div></div>
+          <div class="sheet-card"><div class="sc-label">★ Surprised</div><div class="sc-text">[Anchor] · mouth wide open, blue eyes huge, eyebrows shot up, hands lifted in cartoony "wow!".</div></div>
+          <div class="sheet-card"><div class="sc-label">★ Brave</div><div class="sc-text">[Anchor] · steady focused smile, jaw set, hood pulled up like a cape, golden rim light.</div></div>
+          <div class="sheet-card"><div class="sc-label">★ Worried</div><div class="sc-text">[Anchor] · tight smile (still trying to be positive), eyes glancing sideways, fingers fidgeting zipper.</div></div>
+          <div class="sheet-card"><div class="sc-label">★ Proud</div><div class="sc-text">[Anchor] · radiant smile, fists on hips superhero-style, chest out, blonde hair catching golden light.</div></div>
+          <div class="sheet-card"><div class="sc-label">★ Thinking</div><div class="sc-text">[Anchor] · finger tapping chin, eyes glancing skyward with cheerful curiosity, half-smile.</div></div>
+          <div class="sheet-card"><div class="sc-label">★ Celebrating</div><div class="sc-text">[Anchor] · both arms thrown up in V-shape, jumping, mouth open in cheer, hoodie flying open.</div></div>
+        </div>
+      </div>
+
+      <div class="sheet-section">
+        <div class="sheet-title">Action Sheet <span class="pill">8 poses</span></div>
+        <div class="sheet-grid cols-4">
+          <div class="sheet-card"><div class="sc-label">▸ Standing</div><div class="sc-text">[Anchor] · standing with arms folded happily, weight on one leg, easy smile.</div></div>
+          <div class="sheet-card"><div class="sc-label">▸ Walking</div><div class="sc-text">[Anchor] · brisk cheerful walk, arms swinging easily, whistling expression.</div></div>
+          <div class="sheet-card"><div class="sc-label">▸ Sitting</div><div class="sc-text">[Anchor] · sitting on a low fence with feet swinging, arms behind him, leaning back, smile.</div></div>
+          <div class="sheet-card"><div class="sc-label">▸ Jumping</div><div class="sc-text">[Anchor] · classic mid-air star-jump, arms and legs all extended, big shout of joy.</div></div>
+          <div class="sheet-card"><div class="sc-label">▸ Pointing</div><div class="sc-text">[Anchor] · finger gun pointing at camera with a wink and warm "hey, it's you!" smile.</div></div>
+          <div class="sheet-card"><div class="sc-label">▸ Hugging</div><div class="sc-text">[Anchor] · giving a tight side-hug, beaming smile, hoodie sleeve wrapped around partner.</div></div>
+          <div class="sheet-card"><div class="sc-label">▸ Dancing</div><div class="sc-text">[Anchor] · classic happy bop with both arms moving in opposite directions, cheerful laughing face.</div></div>
+          <div class="sheet-card"><div class="sc-label">▸ Sleeping</div><div class="sc-text">[Anchor] · sprawled with hoodie pulled over head as makeshift pillow, peaceful smile.</div></div>
+        </div>
+      </div>
+
+      <div class="stagecraft">
+        <div class="stage-card">
+          <h5>Voice & speaking style</h5>
+          <p>Bright, sing-song, full of "yes!" and "let's go!". Compliments people specifically — "your hair looks cool today", "that idea is sick". The kid who lifts the room. Best sidekick to Kai.</p>
+        </div>
+        <div class="stage-card">
+          <h5>Signature scene</h5>
+          <p>The morning glow. Wide shot of Finn arriving in a meadow, sunrise behind him, arms thrown wide, hoodie fluttering. Use for any song that opens on a "new day" or "fresh start" energy.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ ZANE ═══ -->
+    <div class="char-profile" style="--accent: var(--c-zane);">
+      <div class="char-header">
+        <div class="char-badge">
+          <div class="ch-num">CHARACTER 08</div>
+          <div class="ch-name">Zane</div>
+          <div class="ch-role">★ The Trendsetter</div>
+        </div>
+        <div class="char-meta">
+          <p class="tagline">"Different is the best kind of cool."</p>
+          <span class="lesson">Lesson · Be yourself loudly. Different is the best kind of cool</span>
+          <div class="traits">
+            <span class="trait">Stylish</span>
+            <span class="trait">Creative</span>
+            <span class="trait">Kind</span>
+            <span class="trait">Quietly confident</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="anchor-block">
+        <div class="anchor-label">★ Anchor description · the locked character</div>
+        <div class="anchor-text">
+          Stylish young boy, age 9, short neat mint green hair with a slight wave styled forward, fair skin, soft pale blue eyes, gentle confident closed-mouth smile, wearing a clean light heather-grey crewneck t-shirt, dark slim joggers, white minimalist sneakers, with both hands clasped together excitedly in front of his chest. Trendy creative kind personality, vibrant 3D cartoon animation style, polished family movie quality, high detail.
+        </div>
+      </div>
+
+      <div class="sheet-section">
+        <div class="sheet-title">Master Portrait Sheet <span class="pill">3 views</span></div>
+        <div class="sheet-sub">Save as <code>zane_front.png</code>, <code>zane_three_quarter.png</code>, <code>zane_side.png</code>. Mint hair colour is the signature anchor — keep it consistent across every frame.</div>
+        <div class="sheet-grid cols-3">
+          <div class="sheet-card"><div class="sc-label">01 · Front view</div><div class="sc-text">[Anchor] · facing camera, hands clasped excitedly at chest, soft confident smile, neutral cream background.</div></div>
+          <div class="sheet-card"><div class="sc-label">02 · Three-quarter</div><div class="sc-text">[Anchor] · three-quarter angle, slight head tilt, mint hair catching golden light, gentle smile.</div></div>
+          <div class="sheet-card"><div class="sc-label">03 · Side profile</div><div class="sc-text">[Anchor] · clean side profile, mint hair silhouette clear, calm focused expression.</div></div>
+        </div>
+      </div>
+
+      <div class="sheet-section">
+        <div class="sheet-title">Expression Sheet <span class="pill">8 emotions</span></div>
+        <div class="sheet-grid cols-4">
+          <div class="sheet-card"><div class="sc-label">★ Happy</div><div class="sc-text">[Anchor] · open laughing smile, eyes squeezed in joy, mint hair bouncing slightly.</div></div>
+          <div class="sheet-card"><div class="sc-label">★ Sad</div><div class="sc-text">[Anchor] · soft downturned mouth, eyes glistening gently, hands lowered, vulnerable look.</div></div>
+          <div class="sheet-card"><div class="sc-label">★ Surprised</div><div class="sc-text">[Anchor] · mouth small "o", eyes wide bright, hands flying up to cheeks, excited shock.</div></div>
+          <div class="sheet-card"><div class="sc-label">★ Brave</div><div class="sc-text">[Anchor] · quiet steady smile, chin lifted, mint hair catching warm rim light, calm power.</div></div>
+          <div class="sheet-card"><div class="sc-label">★ Worried</div><div class="sc-text">[Anchor] · soft frown, hands rubbing each other anxiously, eyes glancing sideways.</div></div>
+          <div class="sheet-card"><div class="sc-label">★ Proud</div><div class="sc-text">[Anchor] · radiant gentle smile, head tipped back slightly, hand pressed to chest in a "yes" gesture.</div></div>
+          <div class="sheet-card"><div class="sc-label">★ Thinking</div><div class="sc-text">[Anchor] · finger tracing chin, eyes glancing upward, soft creative smile, mint hair tussled.</div></div>
+          <div class="sheet-card"><div class="sc-label">★ Celebrating</div><div class="sc-text">[Anchor] · clapping hands together at face level, eyes squeezed in joy, jumping in place.</div></div>
+        </div>
+      </div>
+
+      <div class="sheet-section">
+        <div class="sheet-title">Action Sheet <span class="pill">8 poses</span></div>
+        <div class="sheet-grid cols-4">
+          <div class="sheet-card"><div class="sc-label">▸ Standing</div><div class="sc-text">[Anchor] · standing with hands clasped at chest, slight lean, gentle smile.</div></div>
+          <div class="sheet-card"><div class="sc-label">▸ Walking</div><div class="sc-text">[Anchor] · easy stylish walk, one hand in pocket, mint hair catching breeze.</div></div>
+          <div class="sheet-card"><div class="sc-label">▸ Sitting</div><div class="sc-text">[Anchor] · sitting cross-legged sketching in a notebook, peaceful focused expression.</div></div>
+          <div class="sheet-card"><div class="sc-label">▸ Jumping</div><div class="sc-text">[Anchor] · gentle joyful hop, hands clasped at chest, mint hair lifting, big bright smile.</div></div>
+          <div class="sheet-card"><div class="sc-label">▸ Pointing</div><div class="sc-text">[Anchor] · pointing toward something off-screen with creative excitement, "look at this idea!" smile.</div></div>
+          <div class="sheet-card"><div class="sc-label">▸ Hugging</div><div class="sc-text">[Anchor] · giving a sincere warm hug, eyes closed, soft smile, mint hair against partner shoulder.</div></div>
+          <div class="sheet-card"><div class="sc-label">▸ Dancing</div><div class="sc-text">[Anchor] · smooth choreographed dance pose, one arm overhead, body in fluid line, eyes closed in flow.</div></div>
+          <div class="sheet-card"><div class="sc-label">▸ Sleeping</div><div class="sc-text">[Anchor] · curled with sketchbook open beside him, pencil still in hand, peaceful smile.</div></div>
+        </div>
+      </div>
+
+      <div class="stagecraft">
+        <div class="stage-card">
+          <h5>Voice & speaking style</h5>
+          <p>Soft, considered, often pauses to find the exact word. Says things like "I love that" and "what if it was...". The friend who unlocks creative ideas in the others. Quietly the trend-mover.</p>
+        </div>
+        <div class="stage-card">
+          <h5>Signature scene</h5>
+          <p>The reveal of an idea. Zane turning a sketchbook around to show the others, mint hair illuminated by a warm yellow page-glow, cast leaning in. Use for the "I made this" beat in any creative-confidence song.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ════════════ SECTION 05: SCENE RECIPES ════════════ -->
+<section class="section dark">
+  <div class="wrap">
+    <div class="s-num"><span class="line"></span>Section 05 · Scene Recipes</div>
+    <h2>Pairings, trios, and <em>ensemble shots</em>.</h2>
+    <p class="lede">The cast is more powerful in combination than alone. Some pairings are pure chemistry — drop them in any chorus and the energy lifts. Use these as your starter palette when you build a shot list. The first time a pairing appears in a song, it's a moment. By the fifth video, audiences will recognise the pairing on sight.</p>
+
+    <div class="recipe-grid">
+      <div class="recipe">
+        <div class="recipe-tag">★ Hero Duo</div>
+        <h3>Kai &amp; Maya</h3>
+        <p>The leader and the brave heart. Kai goes first, Maya goes loudest. Use them shoulder-to-shoulder for any "we got this" chorus. Their fist-and-thumbs-up combination is your default chorus hero shot.</p>
+        <div class="recipe-cast">
+          <span class="cast-chip" style="background:var(--c-kai);">Kai</span>
+          <span class="cast-chip" style="background:var(--c-maya);">Maya</span>
+        </div>
+      </div>
+      <div class="recipe">
+        <div class="recipe-tag">★ Brain Trust</div>
+        <h3>Ollie, Ruby &amp; Nova</h3>
+        <p>Three thinkers, three different lanes. Ollie has the answer, Ruby has the question, Nova has the wisdom to choose between them. Use this trio for any verse about thinking, planning, or figuring it out.</p>
+        <div class="recipe-cast">
+          <span class="cast-chip" style="background:var(--c-ollie);">Ollie</span>
+          <span class="cast-chip" style="background:var(--c-ruby);">Ruby</span>
+          <span class="cast-chip" style="background:var(--c-nova);">Nova</span>
+        </div>
+      </div>
+      <div class="recipe">
+        <div class="recipe-tag">★ Energy Pair</div>
+        <h3>Jayden &amp; Finn</h3>
+        <p>The dancer and the cheerleader. Pure kinetic energy — when the song lifts, these two lift it higher. Use for chorus drops, dance breaks, and any beat where you need pace.</p>
+        <div class="recipe-cast">
+          <span class="cast-chip" style="background:var(--c-jayden);">Jayden</span>
+          <span class="cast-chip" style="background:var(--c-finn);">Finn</span>
+        </div>
+      </div>
+      <div class="recipe">
+        <div class="recipe-tag">★ Tender Pair</div>
+        <h3>Lily &amp; Ruby</h3>
+        <p>The youngest and the quiet one. Soft, observant, often share a look that no-one else sees. Use for the bridge — the moment of vulnerability before the final chorus.</p>
+        <div class="recipe-cast">
+          <span class="cast-chip" style="background:var(--c-lily);">Lily</span>
+          <span class="cast-chip" style="background:var(--c-ruby);">Ruby</span>
+        </div>
+      </div>
+      <div class="recipe">
+        <div class="recipe-tag">★ Risk &amp; Reflection</div>
+        <h3>Leo &amp; Nova</h3>
+        <p>The kid who falls and the kid who watches. Leo crashes into a mistake; Nova helps him reframe it. Use for any "try, fail, learn" verse structure.</p>
+        <div class="recipe-cast">
+          <span class="cast-chip" style="background:var(--c-leo);">Leo</span>
+          <span class="cast-chip" style="background:var(--c-nova);">Nova</span>
+        </div>
+      </div>
+      <div class="recipe">
+        <div class="recipe-tag">★ Creative Spark</div>
+        <h3>Zane &amp; Ollie</h3>
+        <p>The aesthetic and the analytical. Zane has the vision, Ollie has the plan. Use this pair for "we're building something" beats and for any module about self-expression.</p>
+        <div class="recipe-cast">
+          <span class="cast-chip" style="background:var(--c-zane);">Zane</span>
+          <span class="cast-chip" style="background:var(--c-ollie);">Ollie</span>
+        </div>
+      </div>
+      <div class="recipe">
+        <div class="recipe-tag">★ Big-Sister Energy</div>
+        <h3>Maya &amp; Lily</h3>
+        <p>Maya leading Lily by the hand, sometimes literally. The fearless big-sister vibe. Use for any moment where confidence is being passed down — a bigger kid showing a smaller one how.</p>
+        <div class="recipe-cast">
+          <span class="cast-chip" style="background:var(--c-maya);">Maya</span>
+          <span class="cast-chip" style="background:var(--c-lily);">Lily</span>
+        </div>
+      </div>
+      <div class="recipe">
+        <div class="recipe-tag">★ Full Ensemble</div>
+        <h3>All Ten · Twitter Header Shot</h3>
+        <p>The signature group composition: ten kids in a soft arc across a green meadow with the navy sky behind them, exactly as on your Twitter header. Use for opening title cards, final choruses, and end-of-video bow shots. This is the brand picture.</p>
+        <div class="recipe-cast">
+          <span class="cast-chip" style="background:var(--c-nova);">Nova</span>
+          <span class="cast-chip" style="background:var(--c-finn);">Finn</span>
+          <span class="cast-chip" style="background:var(--c-leo);">Leo</span>
+          <span class="cast-chip" style="background:var(--c-maya);">Maya</span>
+          <span class="cast-chip" style="background:var(--c-kai);">Kai</span>
+          <span class="cast-chip" style="background:var(--c-ruby);">Ruby</span>
+          <span class="cast-chip" style="background:var(--c-jayden);">Jayden</span>
+          <span class="cast-chip" style="background:var(--c-zane);">Zane</span>
+          <span class="cast-chip" style="background:var(--c-ollie);">Ollie</span>
+          <span class="cast-chip" style="background:var(--c-lily);">Lily</span>
+        </div>
+      </div>
+    </div>
+
+    <div style="background:var(--navy-soft); padding:32px 36px; border-radius:6px; margin-top:48px; border:1px solid var(--border-dark);">
+      <h4>★ Ensemble shot prompt template</h4>
+      <p style="color:rgba(255,253,247,0.85); font-size:15px; line-height:1.7;">
+        <em>"Full ensemble of ten Konfident Kids characters arranged in a soft arc across a sun-dappled green meadow, rolling pine forest in the distance, bright cumulus sky overhead with a soft yellow sunburst behind the centre, all ten kids facing camera with joyful expressions, Kai centre with thumbs up, Maya beside him with fist raised, the rest flanking outward in their signature outfits and poses. Pixar-style premium 3D family animation, golden-hour cinematic lighting, navy and golden yellow palette, 16:9 wide cinematic frame."</em>
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════ SECTION 06: MODULE MAPPING ════════════ -->
+<section class="section">
+  <div class="wrap">
+    <div class="s-num"><span class="line"></span>Section 06 · Module Mapping</div>
+    <h2>Which kid leads <em>which lesson</em>?</h2>
+    <p class="lede">The Konfident Kids course is built around ten core confidence themes. Each theme has a natural lead character — the kid whose personality embodies that lesson best. Use this table to quickly assign your hero kid when you start a new song.</p>
+
+    <table class="mod-table">
+      <thead>
+        <tr>
+          <th style="width:60px;">#</th>
+          <th>Theme</th>
+          <th style="width:130px;">Lead</th>
+          <th style="width:240px;">Supporting cast</th>
+          <th>Why this kid</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="mod-num">01</td>
+          <td class="mod-theme">I am enough</td>
+          <td><strong style="color:var(--c-kai);">Kai</strong></td>
+          <td>Maya, Lily</td>
+          <td>Kai's grounded confidence is the visual anchor for self-worth. Lily anchors the youngest viewer.</td>
+        </tr>
+        <tr>
+          <td class="mod-num">02</td>
+          <td class="mod-theme">Speak up &amp; be heard</td>
+          <td><strong style="color:var(--c-maya);">Maya</strong></td>
+          <td>Lily, Nova</td>
+          <td>Maya leads the fist-in-the-air chorus. Lily models speaking up as the smallest voice. Nova listens.</td>
+        </tr>
+        <tr>
+          <td class="mod-num">03</td>
+          <td class="mod-theme">Try again, try different</td>
+          <td><strong style="color:var(--c-leo);">Leo</strong></td>
+          <td>Kai, Jayden</td>
+          <td>Leo embodies the falling-and-rising arc better than anyone. Kai picks him up. Jayden makes him laugh.</td>
+        </tr>
+        <tr>
+          <td class="mod-num">04</td>
+          <td class="mod-theme">Show you are ready (body language)</td>
+          <td><strong style="color:var(--c-finn);">Finn</strong></td>
+          <td>Kai, Jayden</td>
+          <td>Finn's posture is the visual definition of ready. The boys-trio for any confidence-stance lesson.</td>
+        </tr>
+        <tr>
+          <td class="mod-num">05</td>
+          <td class="mod-theme">Kindness wins</td>
+          <td><strong style="color:var(--c-nova);">Nova</strong></td>
+          <td>Ruby, Lily</td>
+          <td>Nova's kindness-is-clever ethos plus Ruby's quiet thoughtfulness plus Lily's tender honesty.</td>
+        </tr>
+        <tr>
+          <td class="mod-num">06</td>
+          <td class="mod-theme">Handling pressure &amp; mean moments</td>
+          <td><strong style="color:var(--c-ollie);">Ollie</strong></td>
+          <td>Maya, Kai</td>
+          <td>Ollie has the STOP-MOVE-TELL plan. Maya provides courage; Kai shows the group response.</td>
+        </tr>
+        <tr>
+          <td class="mod-num">07</td>
+          <td class="mod-theme">Be yourself loudly</td>
+          <td><strong style="color:var(--c-zane);">Zane</strong></td>
+          <td>Ruby, Maya</td>
+          <td>Zane's mint hair literally is the lesson. Ruby and Maya represent two different ways to be loudly yourself.</td>
+        </tr>
+        <tr>
+          <td class="mod-num">08</td>
+          <td class="mod-theme">Quiet strength &amp; reflection</td>
+          <td><strong style="color:var(--c-ruby);">Ruby</strong></td>
+          <td>Nova, Lily</td>
+          <td>Three quietest kids of the cast. Their tablet, glasses-up moment, and fingertip-up moment make a tender trio.</td>
+        </tr>
+        <tr>
+          <td class="mod-num">09</td>
+          <td class="mod-theme">Joy is contagious</td>
+          <td><strong style="color:var(--c-jayden);">Jayden</strong></td>
+          <td>Finn, Maya</td>
+          <td>The dance-break trio. Jayden moves first, Finn cheers him on, Maya joins with a fist pump.</td>
+        </tr>
+        <tr>
+          <td class="mod-num">10</td>
+          <td class="mod-theme">Choose your style (sharing your story)</td>
+          <td><strong style="color:var(--c-lily);">Lily</strong></td>
+          <td>Zane, Ruby</td>
+          <td>Lily noticing first, Zane styling, Ruby putting it onto her tablet. The smallest voice opens the song.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="quality-gate" style="margin-top:40px;">
+      <strong>★ Use this as a default, not a rule</strong>
+      <p>The lead column is the obvious first move. But part of the cast's power is using a kid <em>against</em> their default — Kai having a worried beat, Lily speaking the bravest line, Ollie dancing with no logic. Subverting expectation occasionally keeps the cast feeling alive across forty videos.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════ SECTION 07: QUALITY GATE ════════════ -->
+<section class="section deep">
+  <div class="wrap">
+    <div class="s-num"><span class="line"></span>Section 07 · Quality Gate</div>
+    <h2>Before you animate <em>anything</em>.</h2>
+    <p class="lede">A keyframe that's slightly off-model is worse than a keyframe you regenerate. One drifted hair colour or missing pair of glasses ripples across every shot in the song. Run this checklist on every keyframe before it leaves the keyframes folder.</p>
+
+    <ul class="checklist" style="background:var(--navy-soft); border-color:var(--border-dark); margin-top:36px;">
+      <li style="color:var(--white); border-color:var(--border-dark);">★ Is the hair colour, length and style identical to the master portrait?</li>
+      <li style="color:var(--white); border-color:var(--border-dark);">★ Are the eyes the right colour? (Nova hazel, Ollie blue, Kai brown, Lily light brown, Finn blue, Zane pale blue, Maya/Jayden/Leo brown, Ruby blue.)</li>
+      <li style="color:var(--white); border-color:var(--border-dark);">★ Is the signature outfit present? (Kai's red star, Maya's yellow headband, Ollie's suspenders &amp; cap, Jayden's backwards cap, Ruby's tablet, Lily's cloud tee, Leo's suspenders, Nova's coral hoodie, Finn's blue zip hoodie, Zane's grey tee.)</li>
+      <li style="color:var(--white); border-color:var(--border-dark);">★ Is the signature accessory in frame? (Glasses on Nova and Ollie are non-negotiable.)</li>
+      <li style="color:var(--white); border-color:var(--border-dark);">★ Are skin tones consistent? (Jayden deep brown, Maya/Leo medium brown, all others fair to peachy.)</li>
+      <li style="color:var(--white); border-color:var(--border-dark);">★ Are proportions child-like? (4–4.5 head body ratio. No tall stretched bodies. No wrinkles or adult features.)</li>
+      <li style="color:var(--white); border-color:var(--border-dark);">★ Is the lighting golden hour with warm yellow rim light? (No grey, blue, or harsh light without an emotional reason.)</li>
+      <li style="color:var(--white); border-color:var(--border-dark);">★ Does the background follow world rules? (Rounded shapes, soft gradients, navy + yellow accents.)</li>
+      <li style="color:var(--white); border-color:var(--border-dark);">★ No extra fingers, melted hands, or floating objects? (Hands and small props are where AI fails most often.)</li>
+      <li style="color:var(--white); border-color:var(--border-dark);">★ Side-by-side test: hold the keyframe next to the master portrait. Does it pass the "same kid" sniff test in under three seconds?</li>
+    </ul>
+
+    <div style="background:var(--navy); padding:36px 40px; border-radius:8px; margin-top:48px; border:1px solid var(--border-yellow); position:relative;">
+      <div style="position:absolute; top:24px; right:36px; font-size:80px; color:var(--yellow); opacity:0.18; line-height:1;">★</div>
+      <h3 style="color:var(--yellow); font-style:italic; margin-bottom:14px;">The single rule that makes everything else work</h3>
+      <p style="color:rgba(255,253,247,0.9); font-size:16px; line-height:1.7; max-width:820px;">
+        Generative AI does not remember your characters. Every time you open a fresh chat, fresh tab, or fresh tool — your cast resets to nothing. The Character Bible exists to overwrite that reset every single time. <strong style="color:var(--yellow);">Reference the master portrait. Always. Every prompt. No exceptions.</strong> One discipline. Forty videos. The same ten kids.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════ FOOTER ════════════ -->
+<footer class="footer">
+  <div class="footer-mark">KonfidentKids</div>
+  <p>Character Bible · v1.0 · Companion to the Animated Song Production Playbook · Ten recurring 3D characters built for forty videos a year. Update only when you ship a new module or refresh the cast — otherwise, keep this document fixed and let the work compound.</p>
+</footer>
+
+</body>
+</html>
